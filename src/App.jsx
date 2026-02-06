@@ -47,10 +47,12 @@ const App = () => {
         setScrollProgress(totalScroll / windowHeight);
 
         // Simple Parallax for hero images
+        // We reduce parallax intensity on mobile for smoother performance
+        const isMobile = window.innerWidth < 768;
         const parallaxElements = document.querySelectorAll('.parallax');
+        
         parallaxElements.forEach(el => {
-          const speed = el.getAttribute('data-speed') || 0.5;
-          // Only apply if element exists to prevent errors
+          const speed = isMobile ? 0.2 : (el.getAttribute('data-speed') || 0.5);
           if (el) {
              el.style.transform = `translateY(${totalScroll * speed}px)`;
           }
@@ -60,7 +62,7 @@ const App = () => {
         const reveals = document.querySelectorAll('.reveal-on-scroll');
         reveals.forEach(el => {
           const elementTop = el.getBoundingClientRect().top;
-          const elementVisible = 150;
+          const elementVisible = 100; // Trigger slightly earlier on mobile
           if (elementTop < window.innerHeight - elementVisible) {
             el.classList.add('active');
           }
@@ -75,7 +77,7 @@ const App = () => {
     };
   }, []);
 
-  // 2. Custom Physics Cursor
+  // 2. Custom Physics Cursor (Desktop Only)
   useEffect(() => {
     const handleMouseMove = (e) => {
       mouse.current = { x: e.clientX, y: e.clientY };
@@ -83,7 +85,6 @@ const App = () => {
 
     let rafId = null;
     const animateCursor = () => {
-      // Lerp (Linear Interpolation) for smooth drag effect
       const xDiff = mouse.current.x - cursor.current.x;
       const yDiff = mouse.current.y - cursor.current.y;
       
@@ -119,7 +120,7 @@ const App = () => {
       subtitle: "Buying & Investing",
       desc: "Access to off-market listings and exclusive estates before they reach the public domain. We navigate the complexities of luxury acquisition with discretion.",
       features: ["Market Analysis", "Private Viewings", "Negotiation Strategy"],
-      icon: <Key size={24} />
+      icon: <Key size={28} />
     },
     {
       id: "02",
@@ -127,7 +128,7 @@ const App = () => {
       subtitle: "Design & Planning",
       desc: "Our in-house architects visualize potential. From renovations to ground-up builds, we bridge the gap between real estate and artistry.",
       features: ["3D Visualization", "Permit Management", "Sustainable Design"],
-      icon: <Ruler size={24} />
+      icon: <Ruler size={28} />
     },
     {
       id: "03",
@@ -135,7 +136,7 @@ const App = () => {
       subtitle: "Staging & Styling",
       desc: "Curating atmospheres that sell. Our interior design team transforms spaces into emotional experiences that resonate with high-net-worth buyers.",
       features: ["Luxury Staging", "Art Curation", "Feng Shui Consultation"],
-      icon: <Armchair size={24} />
+      icon: <Armchair size={28} />
     },
     {
       id: "04",
@@ -143,7 +144,7 @@ const App = () => {
       subtitle: "Project Management",
       desc: "For investors looking to build legacy. We oversee large-scale residential developments from land acquisition to final sale.",
       features: ["ROI Projection", "Contractor Management", "Brand Identity"],
-      icon: <Building size={24} />
+      icon: <Building size={28} />
     }
   ];
 
@@ -236,7 +237,7 @@ const App = () => {
         `}
       </style>
 
-      {/* --- CUSTOM CURSOR --- */}
+      {/* --- CUSTOM CURSOR (Hidden on Touch Devices) --- */}
       <div 
         ref={cursorRef}
         className="fixed top-0 left-0 pointer-events-none z-[100] hidden md:block will-change-transform mix-blend-difference"
@@ -264,7 +265,7 @@ const App = () => {
           <span className="font-display text-2xl tracking-[0.2em]">
             ARCHITECTURA
           </span>
-          <span className="text-[8px] uppercase tracking-[0.4em] font-body opacity-80 mt-1 text-[#D4AF37]">
+          <span className="text-[9px] md:text-[8px] uppercase tracking-[0.3em] md:tracking-[0.4em] font-body opacity-80 mt-1 text-[#D4AF37]">
             Estates & Design
           </span>
         </div>
@@ -282,28 +283,28 @@ const App = () => {
             className="group flex flex-col items-end gap-1.5 p-2"
             onMouseEnter={() => handleCursorHover("Menu")} onMouseLeave={handleCursorLeave}
           >
-            <div className={`w-8 h-[1px] bg-[#FDFBF7] transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
-            <div className={`w-5 h-[1px] bg-[#FDFBF7] transition-all duration-300 ${isMenuOpen ? 'opacity-0' : 'group-hover:w-8'}`}></div>
-            <div className={`w-8 h-[1px] bg-[#FDFBF7] transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}`}></div>
+            <div className={`w-6 md:w-8 h-[1px] bg-[#FDFBF7] transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
+            <div className={`w-4 md:w-5 h-[1px] bg-[#FDFBF7] transition-all duration-300 ${isMenuOpen ? 'opacity-0' : 'group-hover:w-8'}`}></div>
+            <div className={`w-6 md:w-8 h-[1px] bg-[#FDFBF7] transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}`}></div>
           </button>
         </div>
       </nav>
 
       {/* --- FULL SCREEN MENU --- */}
       <div className={`fixed inset-0 bg-[#0f0f0f] z-[60] transition-transform duration-[0.8s] ease-[0.16,1,0.3,1] ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div className="h-full flex flex-col items-center justify-center relative text-[#FDFBF7]">
+        <div className="h-full flex flex-col items-center justify-center relative text-[#FDFBF7] px-6">
           <button 
             onClick={() => setIsMenuOpen(false)}
-            className="absolute top-8 right-8 text-[#FDFBF7] hover:rotate-90 transition-transform duration-500"
+            className="absolute top-8 right-6 md:right-8 text-[#FDFBF7] hover:rotate-90 transition-transform duration-500"
           >
             <X size={32} strokeWidth={1} />
           </button>
-          <ul className="text-center space-y-2">
+          <ul className="text-center space-y-4 md:space-y-2">
             {['Residence', 'Philosophy', 'Services', 'Gallery', 'Contact'].map((item) => (
               <li key={item} className="overflow-hidden group">
                 <a href={`#${item.toLowerCase()}`} 
                    onClick={() => setIsMenuOpen(false)}
-                   className="block text-6xl md:text-8xl font-display text-[#FDFBF7]/30 hover:text-[#FDFBF7] hover:italic transition-all duration-500 transform group-hover:translate-x-4">
+                   className="block text-4xl md:text-8xl font-display text-[#FDFBF7]/30 hover:text-[#FDFBF7] hover:italic transition-all duration-500 transform group-hover:translate-x-4">
                   {item}
                 </a>
               </li>
@@ -320,7 +321,7 @@ const App = () => {
       {/* =========================================
           PAGE 1: HERO SECTION
       ========================================= */}
-      <header id="residence" className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden">
+      <header id="residence" className="relative h-[100dvh] flex flex-col justify-center items-center px-6 overflow-hidden">
         
         {/* Parallax Background */}
         <div className="absolute inset-0 z-0 parallax" data-speed="0.5">
@@ -333,13 +334,13 @@ const App = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/50 via-transparent to-transparent"></div>
         </div>
 
-        <div className="z-10 text-center relative mt-20">
-          <div className="flex items-center justify-center gap-4 mb-12 reveal-up" style={{animationDelay: '0.1s'}}>
-            <span className="h-[1px] w-12 bg-[#FDFBF7]"></span>
+        <div className="z-10 text-center relative mt-20 w-full max-w-[90vw]">
+          <div className="flex items-center justify-center gap-4 mb-8 md:mb-12 reveal-up" style={{animationDelay: '0.1s'}}>
+            <span className="h-[1px] w-8 md:w-12 bg-[#FDFBF7]"></span>
             <p className="font-body text-[10px] md:text-xs tracking-[0.4em] uppercase text-[#FDFBF7]">
               Since 1985
             </p>
-            <span className="h-[1px] w-12 bg-[#FDFBF7]"></span>
+            <span className="h-[1px] w-8 md:w-12 bg-[#FDFBF7]"></span>
           </div>
           
           <h1 className="font-display text-[15vw] md:text-[10rem] leading-[0.8] text-[#FDFBF7] reveal-up mix-blend-overlay" style={{animationDelay: '0.2s'}}>
@@ -347,24 +348,24 @@ const App = () => {
           </h1>
           
           <div className="relative">
-            <h2 className="font-script text-6xl md:text-9xl text-[#D4AF37] reveal-up -mt-4 md:-mt-12 relative z-20" style={{animationDelay: '0.4s'}}>
+            <h2 className="font-script text-[12vw] md:text-9xl text-[#D4AF37] reveal-up -mt-2 md:-mt-12 relative z-20" style={{animationDelay: '0.4s'}}>
               Living Spaces
             </h2>
           </div>
 
-          <p className="font-body text-xs md:text-sm text-[#FDFBF7]/80 max-w-md mx-auto mt-8 tracking-widest leading-relaxed reveal-up" style={{animationDelay: '0.6s'}}>
+          <p className="font-body text-[11px] md:text-sm text-[#FDFBF7]/80 max-w-[80vw] md:max-w-md mx-auto mt-6 md:mt-8 tracking-widest leading-relaxed reveal-up" style={{animationDelay: '0.6s'}}>
             Curating the world's most exceptional properties for the most discerning individuals.
           </p>
 
-          <div className="mt-16 reveal-up" style={{animationDelay: '0.8s'}}>
+          <div className="mt-12 md:mt-16 reveal-up" style={{animationDelay: '0.8s'}}>
              <a href="#gallery" 
-                className="inline-block border border-[#FDFBF7]/30 px-8 py-3 rounded-full text-[#FDFBF7] font-body text-xs uppercase tracking-[0.2em] hover:bg-[#FDFBF7] hover:text-[#1A1A1A] transition-all duration-300">
+                className="inline-block border border-[#FDFBF7]/30 px-6 py-3 md:px-8 md:py-3 rounded-full text-[#FDFBF7] font-body text-[10px] md:text-xs uppercase tracking-[0.2em] hover:bg-[#FDFBF7] hover:text-[#1A1A1A] transition-all duration-300">
                Explore Collection
              </a>
           </div>
         </div>
 
-        <div className="absolute bottom-12 right-12 hidden md:flex flex-col items-end text-[#FDFBF7]/60 z-10">
+        <div className="absolute bottom-8 right-6 md:bottom-12 md:right-12 hidden md:flex flex-col items-end text-[#FDFBF7]/60 z-10">
            <span className="font-display text-4xl">01</span>
            <span className="text-[9px] uppercase tracking-widest mt-1">Introduction</span>
         </div>
@@ -373,20 +374,20 @@ const App = () => {
       {/* =========================================
           PAGE 2: ABOUT US (PHILOSOPHY)
       ========================================= */}
-      <section id="philosophy" className="py-32 px-6 md:px-24 bg-[#FDFBF7] relative">
+      <section id="philosophy" className="py-20 md:py-32 px-6 md:px-24 bg-[#FDFBF7] relative">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16 items-center">
             
             {/* Left Text */}
-            <div className="md:col-span-5 reveal-on-scroll">
-              <span className="block text-[#D4AF37] font-body text-[10px] uppercase tracking-[0.3em] mb-6">
+            <div className="lg:col-span-5 reveal-on-scroll">
+              <span className="block text-[#D4AF37] font-body text-[10px] uppercase tracking-[0.3em] mb-4 md:mb-6">
                 Our Philosophy
               </span>
-              <h2 className="font-display text-5xl md:text-7xl text-[#1A1A1A] leading-[1.1] mb-8">
+              <h2 className="font-display text-4xl md:text-7xl text-[#1A1A1A] leading-[1.1] mb-6 md:mb-8">
                 We don't just sell homes. <br/>
                 <span className="italic opacity-60">We curate lifestyles.</span>
               </h2>
-              <div className="space-y-6 text-[#1A1A1A]/70 font-body text-sm leading-loose text-justify">
+              <div className="space-y-4 md:space-y-6 text-[#1A1A1A]/70 font-body text-[13px] md:text-sm leading-loose text-justify">
                 <p>
                   At Architectura, we believe that a home is more than a structure; it is the physical manifestation of your aspirations. Founded on the principles of integrity, discretion, and aesthetic mastery, we bridge the gap between architectural brilliance and real estate investment.
                 </p>
@@ -395,42 +396,42 @@ const App = () => {
                 </p>
               </div>
               
-              <div className="mt-12 flex items-center gap-4">
+              <div className="mt-8 md:mt-12 flex items-center gap-4">
                 <img 
                   src="https://randomuser.me/api/portraits/men/32.jpg" 
                   alt="Founder" 
-                  className="w-12 h-12 rounded-full grayscale"
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-full grayscale"
                 />
                 <div>
-                  <p className="font-display text-lg text-[#1A1A1A]">Jonathan Sterling</p>
-                  <p className="font-body text-[9px] uppercase tracking-widest text-[#1A1A1A]/50">Founder & Principal Architect</p>
+                  <p className="font-display text-base md:text-lg text-[#1A1A1A]">Jonathan Sterling</p>
+                  <p className="font-body text-[8px] md:text-[9px] uppercase tracking-widest text-[#1A1A1A]/50">Founder & Principal Architect</p>
                 </div>
               </div>
             </div>
 
             {/* Right Image Grid */}
-            <div className="md:col-span-7 relative reveal-on-scroll">
-               <div className="grid grid-cols-2 gap-4">
-                 <div className="space-y-4 mt-12">
+            <div className="lg:col-span-7 relative reveal-on-scroll">
+               <div className="grid grid-cols-2 gap-3 md:gap-4">
+                 <div className="space-y-3 md:space-y-4 mt-8 md:mt-12">
                    <img 
                      src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800" 
-                     className="w-full aspect-[3/4] object-cover hover:grayscale transition-all duration-700" 
+                     className="w-full aspect-[3/4] object-cover hover:grayscale transition-all duration-700 rounded-sm" 
                      alt="Interior Detail"
                      onMouseEnter={() => handleCursorHover("Detail")} onMouseLeave={handleCursorLeave}
                    />
-                   <div className="bg-[#1A1A1A] p-6 text-[#FDFBF7] text-center">
-                      <h4 className="font-display text-2xl">250+</h4>
-                      <p className="text-[9px] uppercase tracking-widest opacity-60">Exclusive Listings</p>
+                   <div className="bg-[#1A1A1A] p-4 md:p-6 text-[#FDFBF7] text-center rounded-sm">
+                      <h4 className="font-display text-xl md:text-2xl">250+</h4>
+                      <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60">Exclusive Listings</p>
                    </div>
                  </div>
-                 <div className="space-y-4">
-                   <div className="bg-[#D4AF37] p-6 text-[#1A1A1A] text-center">
-                      <h4 className="font-display text-2xl">25 Years</h4>
-                      <p className="text-[9px] uppercase tracking-widest opacity-60">Of Excellence</p>
+                 <div className="space-y-3 md:space-y-4">
+                   <div className="bg-[#D4AF37] p-4 md:p-6 text-[#1A1A1A] text-center rounded-sm">
+                      <h4 className="font-display text-xl md:text-2xl">25 Years</h4>
+                      <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60">Of Excellence</p>
                    </div>
                    <img 
                      src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800" 
-                     className="w-full aspect-[3/4] object-cover hover:grayscale transition-all duration-700" 
+                     className="w-full aspect-[3/4] object-cover hover:grayscale transition-all duration-700 rounded-sm" 
                      alt="Exterior"
                      onMouseEnter={() => handleCursorHover("Estate")} onMouseLeave={handleCursorLeave}
                    />
@@ -442,77 +443,106 @@ const App = () => {
       </section>
 
       {/* =========================================
-          PAGE 3: SERVICES (DARK MODE)
+          PAGE 3: SERVICES (ACCORDION ON MOBILE, SPLIT ON DESKTOP)
       ========================================= */}
-      <section id="services" className="py-32 bg-[#111111] text-[#FDFBF7] relative overflow-hidden">
+      <section id="services" className="py-20 md:py-32 bg-[#111111] text-[#FDFBF7] relative overflow-hidden">
         {/* Background Texture */}
         <div className="absolute inset-0 opacity-[0.05]"
              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}>
         </div>
 
         <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <div className="text-center mb-24 reveal-on-scroll">
+          <div className="text-center mb-16 md:mb-24 reveal-on-scroll">
             <span className="text-[#D4AF37] font-body text-[10px] uppercase tracking-[0.3em]">
               Holistic Approach
             </span>
-            <h2 className="font-display text-5xl md:text-7xl mt-4">
+            <h2 className="font-display text-4xl md:text-7xl mt-4">
               Our Services
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* Service Selection List */}
-            <div className="space-y-4 reveal-on-scroll">
+            {/* Service Selection List (Left Column) + Mobile Content */}
+            <div className="lg:col-span-5 space-y-4 reveal-on-scroll">
               {services.map((service, index) => (
-                <div 
-                  key={index}
-                  onClick={() => setActiveService(index)}
-                  className={`group p-8 border border-white/10 cursor-pointer transition-all duration-500 hover:bg-white/5 relative overflow-hidden
-                    ${activeService === index ? 'bg-white/5 border-[#D4AF37]/50' : ''}`}
-                >
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-6">
-                      <span className={`font-display text-xl w-8 ${activeService === index ? 'text-[#D4AF37]' : 'text-white/30'}`}>
-                        {service.id}
-                      </span>
-                      <div>
-                        <h3 className="font-display text-2xl group-hover:italic transition-all">{service.title}</h3>
-                        <p className="font-body text-[10px] uppercase tracking-widest text-white/50">{service.subtitle}</p>
+                <div key={index} className="group">
+                  {/* Header Button */}
+                  <div 
+                    onClick={() => setActiveService(index)}
+                    className={`p-6 md:p-8 border border-white/10 cursor-pointer transition-all duration-500 hover:bg-white/5 relative overflow-hidden
+                      ${activeService === index ? 'bg-white/5 border-[#D4AF37]/50' : ''}`}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-4 md:gap-6">
+                        <span className={`font-display text-lg md:text-xl w-6 md:w-8 transition-colors duration-300 ${activeService === index ? 'text-[#D4AF37]' : 'text-white/30'}`}>
+                          {service.id}
+                        </span>
+                        <div>
+                          <h3 className="font-display text-xl md:text-2xl group-hover:italic transition-all duration-300">{service.title}</h3>
+                          <p className="font-body text-[9px] md:text-[10px] uppercase tracking-widest text-white/50">{service.subtitle}</p>
+                        </div>
                       </div>
+                      <ArrowRight className={`transition-all duration-500 transform ${activeService === index ? 'rotate-90 lg:rotate-0 translate-x-0 opacity-100 text-[#D4AF37]' : '-translate-x-2 md:-translate-x-4 opacity-0 lg:group-hover:opacity-50'}`} />
                     </div>
-                    <ArrowRight className={`transition-transform duration-300 ${activeService === index ? 'translate-x-0 opacity-100 text-[#D4AF37]' : '-translate-x-4 opacity-0'}`} />
+                  </div>
+
+                  {/* MOBILE/TABLET ACCORDION CONTENT (Hidden on Desktop) */}
+                  <div className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${activeService === index ? 'max-h-[600px] opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
+                    <div className="bg-[#1A1A1A] p-8 border border-white/5">
+                        <div className="mb-6 text-[#D4AF37]">
+                            {service.icon}
+                        </div>
+                        <p className="font-body text-sm text-gray-400 leading-loose mb-6">
+                            {service.desc}
+                        </p>
+                        <div className="space-y-4 mb-8">
+                            {service.features.map((feature, fIndex) => (
+                                <div key={fIndex} className="flex items-center gap-4 border-b border-white/10 pb-3">
+                                    <Check size={14} className="text-[#D4AF37]" />
+                                    <span className="font-body text-xs uppercase tracking-widest text-white/80">{feature}</span>
+                                </div>
+                            ))}
+                        </div>
+                        <button className="font-body text-[10px] uppercase tracking-[0.2em] border-b border-[#D4AF37] pb-1 text-[#D4AF37]">
+                            Inquire Now
+                        </button>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Service Detail Card (Dynamic) */}
-            <div className="relative h-full min-h-[400px] bg-[#1A1A1A] p-12 border border-white/5 reveal-on-scroll flex flex-col justify-center">
-               <div className="absolute top-0 right-0 p-12 text-[#D4AF37] opacity-20">
-                 {services[activeService].icon}
-               </div>
-               
-               <h3 className="font-script text-6xl text-[#D4AF37] mb-6 opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]" key={`title-${activeService}`}>
-                 {services[activeService].title}
-               </h3>
-               
-               <p className="font-body text-sm text-gray-400 leading-loose mb-8 opacity-0 animate-[fadeIn_0.5s_ease-out_0.1s_forwards]" key={`desc-${activeService}`}>
-                 {services[activeService].desc}
-               </p>
+            {/* Service Detail Card (Right Column - Desktop Sticky) */}
+            <div className="hidden lg:block lg:col-span-7 relative sticky-container">
+               <div className="relative h-full min-h-[500px] bg-[#1A1A1A] p-8 md:p-16 border border-white/5 reveal-on-scroll flex flex-col justify-center lg:sticky lg:top-32 transition-all duration-700">
+                  <div className="absolute top-0 right-0 p-8 md:p-12 text-[#D4AF37] opacity-20">
+                    {services[activeService].icon}
+                  </div>
+                  
+                  <div key={`content-${activeService}`} className="animate-[fadeIn_0.6s_ease-out]">
+                    <h3 className="font-script text-6xl md:text-8xl text-[#D4AF37] mb-8 opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
+                      {services[activeService].title}
+                    </h3>
+                    
+                    <p className="font-body text-sm md:text-base text-gray-400 leading-loose mb-12 max-w-xl opacity-0 animate-[fadeIn_0.5s_ease-out_0.1s_forwards]">
+                      {services[activeService].desc}
+                    </p>
 
-               <div className="space-y-4">
-                 {services[activeService].features.map((feature, i) => (
-                   <div key={`feat-${i}`} className="flex items-center gap-4 border-b border-white/10 pb-4 opacity-0 animate-[fadeIn_0.5s_ease-out_0.2s_forwards]" style={{animationDelay: `${0.1 * i}s`}}>
-                     <Check size={14} className="text-[#D4AF37]" />
-                     <span className="font-body text-xs uppercase tracking-widest text-white/80">{feature}</span>
-                   </div>
-                 ))}
-               </div>
+                    <div className="space-y-6">
+                      {services[activeService].features.map((feature, i) => (
+                        <div key={`feat-${i}`} className="flex items-center gap-6 border-b border-white/10 pb-6 opacity-0 animate-[fadeIn_0.5s_ease-out_0.2s_forwards]" style={{animationDelay: `${0.1 * i}s`}}>
+                          <Check size={18} className="text-[#D4AF37]" />
+                          <span className="font-body text-xs md:text-sm uppercase tracking-widest text-white/80">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
 
-               <button className="mt-12 self-start font-body text-[10px] uppercase tracking-[0.2em] border-b border-[#D4AF37] pb-1 hover:text-[#D4AF37] transition-colors">
-                 Inquire About {services[activeService].title}
-               </button>
+                    <button className="mt-16 self-start font-body text-xs uppercase tracking-[0.2em] border-b border-[#D4AF37] pb-2 hover:text-[#D4AF37] transition-colors flex items-center gap-2">
+                      Inquire About {services[activeService].title} <ArrowRight size={14} />
+                    </button>
+                  </div>
+               </div>
             </div>
 
           </div>
@@ -522,11 +552,11 @@ const App = () => {
       {/* =========================================
           PAGE 4: GALLERY (THE PORTFOLIO)
       ========================================= */}
-      <section id="gallery" className="py-32 px-6 bg-[#FDFBF7]">
+      <section id="gallery" className="py-20 md:py-32 px-6 bg-[#FDFBF7]">
         <div className="container mx-auto">
-          <div className="flex justify-between items-end mb-16 border-b border-[#1A1A1A]/10 pb-6 reveal-on-scroll">
+          <div className="flex justify-between items-end mb-12 md:mb-16 border-b border-[#1A1A1A]/10 pb-6 reveal-on-scroll">
             <div>
-              <h2 className="font-display text-6xl md:text-8xl text-[#1A1A1A]">Curated<br/>Spaces</h2>
+              <h2 className="font-display text-5xl md:text-8xl text-[#1A1A1A]">Curated<br/>Spaces</h2>
             </div>
             <div className="hidden md:block">
               <p className="font-body text-xs uppercase tracking-widest text-right mb-2">Available for Acquisition</p>
@@ -534,11 +564,11 @@ const App = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 md:gap-y-16">
             {galleryItems.map((item, index) => (
               <div 
                 key={item.id} 
-                className={`group cursor-none ${index % 2 !== 0 ? 'md:mt-24' : ''}`}
+                className={`group md:cursor-none ${index % 2 !== 0 ? 'md:mt-24' : ''}`}
                 onMouseEnter={() => handleCursorHover("View Home")} 
                 onMouseLeave={handleCursorLeave}
               >
@@ -556,12 +586,13 @@ const App = () => {
                 
                 <div className="flex justify-between items-start border-t border-[#1A1A1A] pt-4 transition-all duration-300 group-hover:border-[#D4AF37]">
                   <div>
-                    <h3 className="font-display text-3xl group-hover:italic transition-all">{item.title}</h3>
+                    <h3 className="font-display text-2xl md:text-3xl group-hover:italic transition-all">{item.title}</h3>
                     <p className="font-body text-[10px] uppercase tracking-widest mt-2 opacity-60">{item.specs}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-display text-xl">{item.price}</p>
-                    <button className="opacity-0 group-hover:opacity-100 transition-opacity font-body text-[9px] uppercase tracking-[0.2em] mt-2 border-b border-black">
+                    <p className="font-display text-lg md:text-xl">{item.price}</p>
+                    {/* Always visible on mobile, hover only on desktop */}
+                    <button className="opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity font-body text-[9px] uppercase tracking-[0.2em] mt-2 border-b border-black">
                       Schedule Tour
                     </button>
                   </div>
@@ -570,8 +601,8 @@ const App = () => {
             ))}
           </div>
 
-          <div className="mt-24 text-center">
-            <button className="px-12 py-4 border border-[#1A1A1A] rounded-full font-body text-xs uppercase tracking-[0.2em] hover:bg-[#1A1A1A] hover:text-[#FDFBF7] transition-all duration-300">
+          <div className="mt-16 md:mt-24 text-center">
+            <button className="px-12 py-4 border border-[#1A1A1A] rounded-full font-body text-[10px] md:text-xs uppercase tracking-[0.2em] hover:bg-[#1A1A1A] hover:text-[#FDFBF7] transition-all duration-300">
               View All 42 Listings
             </button>
           </div>
@@ -581,25 +612,25 @@ const App = () => {
       {/* =========================================
           PAGE 5: CONTACT & BOOKING
       ========================================= */}
-      <section id="contact" className="py-32 px-6 md:px-12 bg-[#EBE9E4] relative">
-         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
+      <section id="contact" className="py-20 md:py-32 px-6 md:px-12 bg-[#EBE9E4] relative">
+         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
            
            {/* Info Side */}
            <div className="reveal-on-scroll">
-              <h2 className="font-display text-6xl md:text-8xl leading-none mb-12">
+              <h2 className="font-display text-5xl md:text-8xl leading-none mb-8 md:mb-12">
                 Begin the <br/> Conversation
               </h2>
-              <p className="font-body text-sm leading-loose text-[#1A1A1A]/70 mb-12 max-w-md">
+              <p className="font-body text-[13px] md:text-sm leading-loose text-[#1A1A1A]/70 mb-8 md:mb-12 max-w-md">
                 Whether you are looking to acquire a new sanctuary or list a property of distinction, our team is ready to provide a seamless experience.
               </p>
 
-              <div className="space-y-8">
+              <div className="space-y-6 md:space-y-8">
                 <div className="flex gap-4 items-start">
                    <div className="bg-[#1A1A1A] text-[#FDFBF7] p-3 rounded-full">
                      <MapPin size={20} />
                    </div>
                    <div>
-                     <h4 className="font-display text-xl">Headquarters</h4>
+                     <h4 className="font-display text-lg md:text-xl">Headquarters</h4>
                      <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">1001 Fifth Avenue,<br/>New York, NY 10028</p>
                    </div>
                 </div>
@@ -609,7 +640,7 @@ const App = () => {
                      <Phone size={20} />
                    </div>
                    <div>
-                     <h4 className="font-display text-xl">Private Line</h4>
+                     <h4 className="font-display text-lg md:text-xl">Private Line</h4>
                      <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">+1 (212) 555-0198</p>
                    </div>
                 </div>
@@ -617,13 +648,13 @@ const App = () => {
            </div>
 
            {/* Booking Form */}
-           <div className="bg-[#FDFBF7] p-8 md:p-12 shadow-2xl reveal-on-scroll relative overflow-hidden">
+           <div className="bg-[#FDFBF7] p-6 md:p-12 shadow-2xl reveal-on-scroll relative overflow-hidden">
              {/* Decorative line */}
              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37] to-transparent"></div>
 
              <div className="mb-8 flex justify-between items-end">
-                <h3 className="font-display text-3xl">Consultation</h3>
-                <span className="font-body text-[10px] uppercase tracking-widest text-[#D4AF37]">
+                <h3 className="font-display text-2xl md:text-3xl">Consultation</h3>
+                <span className="font-body text-[9px] md:text-[10px] uppercase tracking-widest text-[#D4AF37]">
                   Step {bookingStep} of 2
                 </span>
              </div>
@@ -648,12 +679,12 @@ const App = () => {
 
                  <div className="space-y-2">
                     <label className="text-[9px] uppercase tracking-widest font-bold">I am Interested In</label>
-                    <div className="flex gap-4 mt-2">
+                    <div className="flex gap-2 md:gap-4 mt-2">
                       {['Buying', 'Selling', 'Design'].map(opt => (
                         <button 
                           key={opt}
                           onClick={() => setFormData({...formData, interest: opt})}
-                          className={`flex-1 py-3 text-xs uppercase tracking-wider border transition-all
+                          className={`flex-1 py-3 text-[10px] md:text-xs uppercase tracking-wider border transition-all
                             ${formData.interest === opt ? 'bg-[#1A1A1A] text-[#FDFBF7] border-[#1A1A1A]' : 'border-[#1A1A1A]/20 hover:border-[#1A1A1A]'}`}
                         >
                           {opt}
@@ -678,7 +709,7 @@ const App = () => {
                      <button
                        key={slot}
                        onClick={() => setSelectedSlot(slot)}
-                       className={`py-3 px-4 border text-xs font-body transition-all flex justify-between items-center
+                       className={`py-3 px-2 md:px-4 border text-[10px] md:text-xs font-body transition-all flex justify-between items-center
                          ${selectedSlot === slot 
                             ? 'bg-[#1A1A1A] text-[#FDFBF7] border-[#1A1A1A]' 
                             : 'border-[#1A1A1A]/10 hover:border-[#1A1A1A] text-[#1A1A1A]'}`}
@@ -710,13 +741,13 @@ const App = () => {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="bg-[#1A1A1A] text-[#FDFBF7] pt-24 pb-8 border-t border-white/10">
+      <footer className="bg-[#1A1A1A] text-[#FDFBF7] pt-16 md:pt-24 pb-8 border-t border-white/10">
         <div className="container mx-auto px-6 md:px-12 text-center">
-           <h2 className="font-display text-[12vw] leading-none opacity-20 select-none">ARCHITECTURA</h2>
+           <h2 className="font-display text-[15vw] md:text-[12vw] leading-none opacity-20 select-none">ARCHITECTURA</h2>
            
-           <div className="flex flex-col md:flex-row justify-between items-center mt-12 pt-8 border-t border-white/10 font-body text-[10px] uppercase tracking-[0.2em] text-white/40">
-             <p>&copy; 2025 Architectura Real Estate</p>
-             <div className="flex gap-8 mt-4 md:mt-0">
+           <div className="flex flex-col md:flex-row justify-between items-center mt-8 md:mt-12 pt-8 border-t border-white/10 font-body text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-white/40">
+             <p className="mb-4 md:mb-0">&copy; 2025 Architectura Real Estate</p>
+             <div className="flex gap-6 md:gap-8">
                <a href="#" className="hover:text-[#D4AF37] transition-colors">Privacy</a>
                <a href="#" className="hover:text-[#D4AF37] transition-colors">Terms</a>
                <a href="#" className="hover:text-[#D4AF37] transition-colors">Sitemap</a>
