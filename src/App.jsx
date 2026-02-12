@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  ArrowUpRight, X, MapPin, Star, Key, Ruler, 
-  Armchair, Building, Calendar, Clock, Check, 
-  ArrowRight, Mail, Phone, Instagram, Linkedin, Facebook 
+import {
+  ArrowUpRight, X, MapPin, Star, Key, Ruler,
+  Armchair, Building, Calendar, Clock, Check,
+  ArrowRight, Mail, Phone, Instagram, Linkedin, Facebook
 } from 'lucide-react';
 
 /**
- * ARCHITECTURA - Ultra Luxury Real Estate Experience
+ * AESTHETICA - Ultra Luxury Interior Design
  * --------------------------------------------------
  * Design Philosophy: Minimalist Luxury, Editorial Typography, Fluid Motion.
  * Font Stack: Italiana (Headings), Monsieur La Doulaise (Script), Montserrat (Body).
@@ -19,7 +19,7 @@ const App = () => {
   const [activeCursor, setActiveCursor] = useState(false);
   const [cursorText, setCursorText] = useState("View");
   const [activeService, setActiveService] = useState(0);
-  
+
   // Form State
   const [bookingStep, setBookingStep] = useState(1);
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -27,7 +27,7 @@ const App = () => {
     name: '',
     email: '',
     phone: '',
-    interest: 'Buying'
+    interest: 'Residential'
   });
 
   // --- REFS ---
@@ -50,11 +50,11 @@ const App = () => {
         // We reduce parallax intensity on mobile for smoother performance
         const isMobile = window.innerWidth < 768;
         const parallaxElements = document.querySelectorAll('.parallax');
-        
+
         parallaxElements.forEach(el => {
           const speed = isMobile ? 0.2 : (el.getAttribute('data-speed') || 0.5);
           if (el) {
-             el.style.transform = `translateY(${totalScroll * speed}px)`;
+            el.style.transform = `translateY(${totalScroll * speed}px)`;
           }
         });
 
@@ -87,14 +87,14 @@ const App = () => {
     const animateCursor = () => {
       const xDiff = mouse.current.x - cursor.current.x;
       const yDiff = mouse.current.y - cursor.current.y;
-      
+
       cursor.current.x += xDiff * 0.12;
       cursor.current.y += yDiff * 0.12;
 
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate3d(${cursor.current.x}px, ${cursor.current.y}px, 0)`;
       }
-      
+
       rafId = requestAnimationFrame(animateCursor);
     };
 
@@ -116,70 +116,70 @@ const App = () => {
   const services = [
     {
       id: "01",
-      title: "Acquisition",
-      subtitle: "Buying & Investing",
-      desc: "Access to off-market listings and exclusive estates before they reach the public domain. We navigate the complexities of luxury acquisition with discretion.",
-      features: ["Market Analysis", "Private Viewings", "Negotiation Strategy"],
-      icon: <Key size={28} />
-    },
-    {
-      id: "02",
-      title: "Architectural",
-      subtitle: "Design & Planning",
-      desc: "Our in-house architects visualize potential. From renovations to ground-up builds, we bridge the gap between real estate and artistry.",
-      features: ["3D Visualization", "Permit Management", "Sustainable Design"],
+      title: "Spatial Planning",
+      subtitle: "Flow & Function",
+      desc: "Optimizing the rhythm of your home. We analyze movement, light, and utility to create layouts that feel intuitive and expansive.",
+      features: ["Floorplan Optimization", "Light Analysis", "Flow Dynamics"],
       icon: <Ruler size={28} />
     },
     {
+      id: "02",
+      title: "Interior Architecture",
+      subtitle: "Structure & Detail",
+      desc: "Redefining the bones of a space. From bespoke joinery to structural modifications, we craft the permanent elements that define character.",
+      features: ["Custom Millwork", "Material Selection", "Structural Refinement"],
+      icon: <Building size={28} />
+    },
+    {
       id: "03",
-      title: "Interiors",
-      subtitle: "Staging & Styling",
-      desc: "Curating atmospheres that sell. Our interior design team transforms spaces into emotional experiences that resonate with high-net-worth buyers.",
-      features: ["Luxury Staging", "Art Curation", "Feng Shui Consultation"],
+      title: "Bespoke Styling",
+      subtitle: "Furniture & Decor",
+      desc: "The art of selection. We source rare vintage pieces and commission custom furniture to create a layered, collected narrative.",
+      features: ["Textile curation", "Vintage Sourcing", "Custom Furniture"],
       icon: <Armchair size={28} />
     },
     {
       id: "04",
-      title: "Development",
-      subtitle: "Project Management",
-      desc: "For investors looking to build legacy. We oversee large-scale residential developments from land acquisition to final sale.",
-      features: ["ROI Projection", "Contractor Management", "Brand Identity"],
-      icon: <Building size={28} />
+      title: "Art Curation",
+      subtitle: "Finishing Touches",
+      desc: "Soulful additions that provoke thought. We work with galleries and artists to find pieces that resonate with your personal aesthetic.",
+      features: ["Gallery Partnerships", "Installation Styling", "Lighting Design"],
+      icon: <Star size={28} />
     }
   ];
 
   const galleryItems = [
     {
       id: 1,
-      title: "The Glass House",
-      location: "Beverly Hills, CA",
-      price: "$14,500,000",
-      image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      specs: "5 Bed | 7 Bath | 6,500 sqft"
+      title: "The Obsidian Lounge",
+      location: "Kyoto, Japan",
+      price: "Completed 2024",
+      image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200",
+      specs: "Custom Joinery | Dark Oak"
     },
     {
       id: 2,
-      title: "Nordic Retreat",
-      location: "Oslo, Norway",
-      price: "$8,200,000",
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1200",
-      specs: "4 Bed | 4 Bath | 4,200 sqft"
+      title: "Serenity Suite",
+      location: "Copenhagen, DK",
+      price: "Completed 2023",
+      image: "https://plus.unsplash.com/premium_photo-1661963630748-3de7ab820570?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      specs: "Minimalist | Natural Light"
     },
     {
       id: 3,
-      title: "Azure Villa",
-      location: "Nice, France",
-      price: "$22,000,000",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200",
-      specs: "8 Bed | 10 Bath | 12,000 sqft"
+      title: "Azure Atelier",
+      location: "Paris, France",
+      price: "Completed 2024",
+      image: "https://images.unsplash.com/photo-1616137466211-f939a420be84?auto=format&fit=crop&q=80&w=1200",
+      specs: "Haussmann Style | Velvet"
     },
     {
       id: 4,
-      title: "Urban Penthouse",
+      title: "Urban Sanctuary",
       location: "New York, NY",
-      price: "$18,500,000",
-      image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1200",
-      specs: "3 Bed | 3.5 Bath | 3,800 sqft"
+      price: "In Progress",
+      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200",
+      specs: "Industrial Zen | Concrete"
     }
   ];
 
@@ -188,7 +188,7 @@ const App = () => {
   ];
 
   // --- HANDLERS ---
-  
+
   const handleCursorHover = (text = "View") => {
     setCursorText(text);
     setActiveCursor(true);
@@ -200,7 +200,7 @@ const App = () => {
 
   return (
     <div className="bg-[#FDFBF7] min-h-screen font-sans selection:bg-[#1A1A1A] selection:text-[#D4AF37] cursor-auto md:cursor-none overflow-x-hidden">
-      
+
       {/* --- GLOBAL STYLES & FONTS --- */}
       <style>
         {`
@@ -238,11 +238,11 @@ const App = () => {
       </style>
 
       {/* --- CUSTOM CURSOR (Hidden on Touch Devices) --- */}
-      <div 
+      <div
         ref={cursorRef}
         className="fixed top-0 left-0 pointer-events-none z-[100] hidden md:block will-change-transform mix-blend-difference"
       >
-        <div 
+        <div
           className={`
             relative -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border border-[#FDFBF7] transition-all duration-300 ease-out
             ${activeCursor ? 'w-32 h-32 bg-[#FDFBF7] text-[#1A1A1A] scale-100' : 'w-5 h-5 bg-transparent scale-100'}
@@ -256,29 +256,29 @@ const App = () => {
 
       {/* --- NOISE OVERLAY --- */}
       <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-40 mix-blend-multiply"
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
       </div>
 
       {/* --- NAVIGATION --- */}
       <nav className="fixed w-full z-50 px-6 py-6 md:px-12 md:py-8 flex justify-between items-center mix-blend-difference text-[#FDFBF7]">
         <div className="flex flex-col group cursor-pointer" onMouseEnter={() => handleCursorHover("Home")} onMouseLeave={handleCursorLeave}>
           <span className="font-display text-2xl tracking-[0.2em]">
-            ARCHITECTURA
+            AESTHETICA
           </span>
           <span className="text-[9px] md:text-[8px] uppercase tracking-[0.3em] md:tracking-[0.4em] font-body opacity-80 mt-1 text-[#D4AF37]">
-            Estates & Design
+            Interior Design Studio
           </span>
         </div>
 
         <div className="flex items-center gap-8">
-           <button className="hidden md:block font-body text-[10px] uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">
-             Properties
-           </button>
-           <button className="hidden md:block font-body text-[10px] uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">
-             Journal
-           </button>
-           
-           <button 
+          <button className="hidden md:block font-body text-[10px] uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">
+            Portfolio
+          </button>
+          <button className="hidden md:block font-body text-[10px] uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">
+            Journal
+          </button>
+
+          <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="group flex flex-col items-end gap-1.5 p-2"
             onMouseEnter={() => handleCursorHover("Menu")} onMouseLeave={handleCursorLeave}
@@ -293,27 +293,27 @@ const App = () => {
       {/* --- FULL SCREEN MENU --- */}
       <div className={`fixed inset-0 bg-[#0f0f0f] z-[60] transition-transform duration-[0.8s] ease-[0.16,1,0.3,1] ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="h-full flex flex-col items-center justify-center relative text-[#FDFBF7] px-6">
-          <button 
+          <button
             onClick={() => setIsMenuOpen(false)}
             className="absolute top-8 right-6 md:right-8 text-[#FDFBF7] hover:rotate-90 transition-transform duration-500"
           >
             <X size={32} strokeWidth={1} />
           </button>
           <ul className="text-center space-y-4 md:space-y-2">
-            {['Residence', 'Philosophy', 'Services', 'Gallery', 'Contact'].map((item) => (
+            {['Residence', 'Philosophy', 'Services', 'Portfolio', 'Contact'].map((item) => (
               <li key={item} className="overflow-hidden group">
-                <a href={`#${item.toLowerCase()}`} 
-                   onClick={() => setIsMenuOpen(false)}
-                   className="block text-4xl md:text-8xl font-display text-[#FDFBF7]/30 hover:text-[#FDFBF7] hover:italic transition-all duration-500 transform group-hover:translate-x-4">
+                <a href={`#${item.toLowerCase()}`}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block text-4xl md:text-8xl font-display text-[#FDFBF7]/30 hover:text-[#FDFBF7] hover:italic transition-all duration-500 transform group-hover:translate-x-4">
                   {item}
                 </a>
               </li>
             ))}
           </ul>
           <div className="absolute bottom-12 flex gap-8">
-             <Instagram className="opacity-50 hover:opacity-100 transition-opacity" size={20} />
-             <Linkedin className="opacity-50 hover:opacity-100 transition-opacity" size={20} />
-             <Facebook className="opacity-50 hover:opacity-100 transition-opacity" size={20} />
+            <Instagram className="opacity-50 hover:opacity-100 transition-opacity" size={20} />
+            <Linkedin className="opacity-50 hover:opacity-100 transition-opacity" size={20} />
+            <Facebook className="opacity-50 hover:opacity-100 transition-opacity" size={20} />
           </div>
         </div>
       </div>
@@ -322,12 +322,12 @@ const App = () => {
           PAGE 1: HERO SECTION
       ========================================= */}
       <header id="residence" className="relative h-[100dvh] flex flex-col justify-center items-center px-6 overflow-hidden">
-        
+
         {/* Parallax Background */}
         <div className="absolute inset-0 z-0 parallax" data-speed="0.5">
-          <img 
-            src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=2500" 
-            alt="Luxury Architecture" 
+          <img
+            src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=2500"
+            alt="Luxury Architecture"
             className="w-full h-[120%] object-cover"
           />
           <div className="absolute inset-0 bg-black/30"></div>
@@ -335,39 +335,39 @@ const App = () => {
         </div>
 
         <div className="z-10 text-center relative mt-20 w-full max-w-[90vw]">
-          <div className="flex items-center justify-center gap-4 mb-8 md:mb-12 reveal-up" style={{animationDelay: '0.1s'}}>
+          <div className="flex items-center justify-center gap-4 mb-8 md:mb-12 reveal-up" style={{ animationDelay: '0.1s' }}>
             <span className="h-[1px] w-8 md:w-12 bg-[#FDFBF7]"></span>
             <p className="font-body text-[10px] md:text-xs tracking-[0.4em] uppercase text-[#FDFBF7]">
               Since 1985
             </p>
             <span className="h-[1px] w-8 md:w-12 bg-[#FDFBF7]"></span>
           </div>
-          
-          <h1 className="font-display text-[15vw] md:text-[10rem] leading-[0.8] text-[#FDFBF7] reveal-up mix-blend-overlay" style={{animationDelay: '0.2s'}}>
-            ETHEREAL
+
+          <h1 className="font-display text-[15vw] md:text-[10rem] leading-[0.8] text-[#FDFBF7] reveal-up mix-blend-overlay" style={{ animationDelay: '0.2s' }}>
+            ATMOSPHERE
           </h1>
-          
+
           <div className="relative">
-            <h2 className="font-script text-[12vw] md:text-9xl text-[#D4AF37] reveal-up -mt-2 md:-mt-12 relative z-20" style={{animationDelay: '0.4s'}}>
-              Living Spaces
+            <h2 className="font-script text-[12vw] md:text-9xl text-[#D4AF37] reveal-up -mt-2 md:-mt-12 relative z-20" style={{ animationDelay: '0.4s' }}>
+              Art of Living
             </h2>
           </div>
 
-          <p className="font-body text-[11px] md:text-sm text-[#FDFBF7]/80 max-w-[80vw] md:max-w-md mx-auto mt-6 md:mt-8 tracking-widest leading-relaxed reveal-up" style={{animationDelay: '0.6s'}}>
-            Curating the world's most exceptional properties for the most discerning individuals.
+          <p className="font-body text-[11px] md:text-sm text-[#FDFBF7]/80 max-w-[80vw] md:max-w-md mx-auto mt-6 md:mt-8 tracking-widest leading-relaxed reveal-up" style={{ animationDelay: '0.6s' }}>
+            Crafting bespoke environments that transcend the ordinary. Where space becomes emotion.
           </p>
 
-          <div className="mt-12 md:mt-16 reveal-up" style={{animationDelay: '0.8s'}}>
-             <a href="#gallery" 
-                className="inline-block border border-[#FDFBF7]/30 px-6 py-3 md:px-8 md:py-3 rounded-full text-[#FDFBF7] font-body text-[10px] md:text-xs uppercase tracking-[0.2em] hover:bg-[#FDFBF7] hover:text-[#1A1A1A] transition-all duration-300">
-               Explore Collection
-             </a>
+          <div className="mt-12 md:mt-16 reveal-up" style={{ animationDelay: '0.8s' }}>
+            <a href="#portfolio"
+              className="inline-block border border-[#FDFBF7]/30 px-6 py-3 md:px-8 md:py-3 rounded-full text-[#FDFBF7] font-body text-[10px] md:text-xs uppercase tracking-[0.2em] hover:bg-[#FDFBF7] hover:text-[#1A1A1A] transition-all duration-300">
+              View Projects
+            </a>
           </div>
         </div>
 
         <div className="absolute bottom-8 right-6 md:bottom-12 md:right-12 hidden md:flex flex-col items-end text-[#FDFBF7]/60 z-10">
-           <span className="font-display text-4xl">01</span>
-           <span className="text-[9px] uppercase tracking-widest mt-1">Introduction</span>
+          <span className="font-display text-4xl">01</span>
+          <span className="text-[9px] uppercase tracking-widest mt-1">Introduction</span>
         </div>
       </header>
 
@@ -377,29 +377,29 @@ const App = () => {
       <section id="philosophy" className="py-20 md:py-32 px-6 md:px-24 bg-[#FDFBF7] relative">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16 items-center">
-            
+
             {/* Left Text */}
             <div className="lg:col-span-5 reveal-on-scroll">
               <span className="block text-[#D4AF37] font-body text-[10px] uppercase tracking-[0.3em] mb-4 md:mb-6">
                 Our Philosophy
               </span>
               <h2 className="font-display text-4xl md:text-7xl text-[#1A1A1A] leading-[1.1] mb-6 md:mb-8">
-                We don't just sell homes. <br/>
+                We don't just design spaces. <br />
                 <span className="italic opacity-60">We curate lifestyles.</span>
               </h2>
               <div className="space-y-4 md:space-y-6 text-[#1A1A1A]/70 font-body text-[13px] md:text-sm leading-loose text-justify">
                 <p>
-                  At Architectura, we believe that a home is more than a structure; it is the physical manifestation of your aspirations. Founded on the principles of integrity, discretion, and aesthetic mastery, we bridge the gap between architectural brilliance and real estate investment.
+                  At Aesthetica, we believe that a home is more than a structure; it is the physical manifestation of your inner world. Founded on the principles of sensory depth and aesthetic mastery, we bridge the gap between architectural form and human emotion.
                 </p>
                 <p>
-                  Our team consists not just of agents, but of architects, designers, and market analysts who understand the nuance of luxury. We see the potential in every line, the value in every view, and the story in every space.
+                  Our team consists of interior architects, textile specialists, and art curators who understand the nuance of luxury. We see the potential in every shadow, the value in every texture, and the story in every curated corner.
                 </p>
               </div>
-              
+
               <div className="mt-8 md:mt-12 flex items-center gap-4">
-                <img 
-                  src="https://randomuser.me/api/portraits/men/32.jpg" 
-                  alt="Founder" 
+                <img
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  alt="Founder"
                   className="w-10 h-10 md:w-12 md:h-12 rounded-full grayscale"
                 />
                 <div>
@@ -411,32 +411,32 @@ const App = () => {
 
             {/* Right Image Grid */}
             <div className="lg:col-span-7 relative reveal-on-scroll">
-               <div className="grid grid-cols-2 gap-3 md:gap-4">
-                 <div className="space-y-3 md:space-y-4 mt-8 md:mt-12">
-                   <img 
-                     src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800" 
-                     className="w-full aspect-[3/4] object-cover hover:grayscale transition-all duration-700 rounded-sm" 
-                     alt="Interior Detail"
-                     onMouseEnter={() => handleCursorHover("Detail")} onMouseLeave={handleCursorLeave}
-                   />
-                   <div className="bg-[#1A1A1A] p-4 md:p-6 text-[#FDFBF7] text-center rounded-sm">
-                      <h4 className="font-display text-xl md:text-2xl">250+</h4>
-                      <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60">Exclusive Listings</p>
-                   </div>
-                 </div>
-                 <div className="space-y-3 md:space-y-4">
-                   <div className="bg-[#D4AF37] p-4 md:p-6 text-[#1A1A1A] text-center rounded-sm">
-                      <h4 className="font-display text-xl md:text-2xl">25 Years</h4>
-                      <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60">Of Excellence</p>
-                   </div>
-                   <img 
-                     src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800" 
-                     className="w-full aspect-[3/4] object-cover hover:grayscale transition-all duration-700 rounded-sm" 
-                     alt="Exterior"
-                     onMouseEnter={() => handleCursorHover("Estate")} onMouseLeave={handleCursorLeave}
-                   />
-                 </div>
-               </div>
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
+                <div className="space-y-3 md:space-y-4 mt-8 md:mt-12">
+                  <img
+                    src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800"
+                    className="w-full aspect-[3/4] object-cover hover:grayscale transition-all duration-700 rounded-sm"
+                    alt="Interior Detail"
+                    onMouseEnter={() => handleCursorHover("Detail")} onMouseLeave={handleCursorLeave}
+                  />
+                  <div className="bg-[#1A1A1A] p-4 md:p-6 text-[#FDFBF7] text-center rounded-sm">
+                    <h4 className="font-display text-xl md:text-2xl">100+</h4>
+                    <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60">Projects Completed</p>
+                  </div>
+                </div>
+                <div className="space-y-3 md:space-y-4">
+                  <div className="bg-[#D4AF37] p-4 md:p-6 text-[#1A1A1A] text-center rounded-sm">
+                    <h4 className="font-display text-xl md:text-2xl">15 Years</h4>
+                    <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60">Of Excellence</p>
+                  </div>
+                  <img
+                    src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800"
+                    className="w-full aspect-[3/4] object-cover hover:grayscale transition-all duration-700 rounded-sm"
+                    alt="Exterior"
+                    onMouseEnter={() => handleCursorHover("Estate")} onMouseLeave={handleCursorLeave}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -445,10 +445,9 @@ const App = () => {
       {/* =========================================
           PAGE 3: SERVICES (ACCORDION ON MOBILE, SPLIT ON DESKTOP)
       ========================================= */}
-      <section id="services" className="py-20 md:py-32 bg-[#111111] text-[#FDFBF7] relative overflow-hidden">
-        {/* Background Texture */}
+      <section   id="services" className="py-20 md:py-32 bg-[#111111] text-[#FDFBF7] relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.05]"
-             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}>
+          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}>
         </div>
 
         <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -462,13 +461,13 @@ const App = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            
+
             {/* Service Selection List (Left Column) + Mobile Content */}
             <div className="lg:col-span-5 space-y-4 reveal-on-scroll">
               {services.map((service, index) => (
                 <div key={index} className="group">
                   {/* Header Button */}
-                  <div 
+                  <div
                     onClick={() => setActiveService(index)}
                     className={`p-6 md:p-8 border border-white/10 cursor-pointer transition-all duration-500 hover:bg-white/5 relative overflow-hidden
                       ${activeService === index ? 'bg-white/5 border-[#D4AF37]/50' : ''}`}
@@ -490,23 +489,23 @@ const App = () => {
                   {/* MOBILE/TABLET ACCORDION CONTENT (Hidden on Desktop) */}
                   <div className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${activeService === index ? 'max-h-[600px] opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
                     <div className="bg-[#1A1A1A] p-8 border border-white/5">
-                        <div className="mb-6 text-[#D4AF37]">
-                            {service.icon}
-                        </div>
-                        <p className="font-body text-sm text-gray-400 leading-loose mb-6">
-                            {service.desc}
-                        </p>
-                        <div className="space-y-4 mb-8">
-                            {service.features.map((feature, fIndex) => (
-                                <div key={fIndex} className="flex items-center gap-4 border-b border-white/10 pb-3">
-                                    <Check size={14} className="text-[#D4AF37]" />
-                                    <span className="font-body text-xs uppercase tracking-widest text-white/80">{feature}</span>
-                                </div>
-                            ))}
-                        </div>
-                        <button className="font-body text-[10px] uppercase tracking-[0.2em] border-b border-[#D4AF37] pb-1 text-[#D4AF37]">
-                            Inquire Now
-                        </button>
+                      <div className="mb-6 text-[#D4AF37]">
+                        {service.icon}
+                      </div>
+                      <p className="font-body text-sm text-gray-400 leading-loose mb-6">
+                        {service.desc}
+                      </p>
+                      <div className="space-y-4 mb-8">
+                        {service.features.map((feature, fIndex) => (
+                          <div key={fIndex} className="flex items-center gap-4 border-b border-white/10 pb-3">
+                            <Check size={14} className="text-[#D4AF37]" />
+                            <span className="font-body text-xs uppercase tracking-widest text-white/80">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <button className="font-body text-[10px] uppercase tracking-[0.2em] border-b border-[#D4AF37] pb-1 text-[#D4AF37]">
+                        Inquire Now
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -515,36 +514,76 @@ const App = () => {
 
             {/* Service Detail Card (Right Column - Desktop Sticky) */}
             <div className="hidden lg:block lg:col-span-7 relative sticky-container">
-               <div className="relative h-full min-h-[500px] bg-[#1A1A1A] p-8 md:p-16 border border-white/5 reveal-on-scroll flex flex-col justify-center lg:sticky lg:top-32 transition-all duration-700">
-                  <div className="absolute top-0 right-0 p-8 md:p-12 text-[#D4AF37] opacity-20">
-                    {services[activeService].icon}
-                  </div>
-                  
-                  <div key={`content-${activeService}`} className="animate-[fadeIn_0.6s_ease-out]">
-                    <h3 className="font-script text-6xl md:text-8xl text-[#D4AF37] mb-8 opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
-                      {services[activeService].title}
-                    </h3>
-                    
-                    <p className="font-body text-sm md:text-base text-gray-400 leading-loose mb-12 max-w-xl opacity-0 animate-[fadeIn_0.5s_ease-out_0.1s_forwards]">
-                      {services[activeService].desc}
-                    </p>
+              <div className="relative h-full min-h-[500px] bg-[#1A1A1A] p-8 md:p-16 border border-white/5 reveal-on-scroll flex flex-col justify-center lg:sticky lg:top-32 transition-all duration-700">
+                <div className="absolute top-0 right-0 p-8 md:p-12 text-[#D4AF37] opacity-20">
+                  {services[activeService].icon}
+                </div>
 
-                    <div className="space-y-6">
-                      {services[activeService].features.map((feature, i) => (
-                        <div key={`feat-${i}`} className="flex items-center gap-6 border-b border-white/10 pb-6 opacity-0 animate-[fadeIn_0.5s_ease-out_0.2s_forwards]" style={{animationDelay: `${0.1 * i}s`}}>
-                          <Check size={18} className="text-[#D4AF37]" />
-                          <span className="font-body text-xs md:text-sm uppercase tracking-widest text-white/80">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
+                <div key={`content-${activeService}`} className="animate-[fadeIn_0.6s_ease-out]">
+                  <h3 className="font-script text-6xl md:text-8xl text-[#D4AF37] mb-8 opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
+                    {services[activeService].title}
+                  </h3>
 
-                    <button className="mt-16 self-start font-body text-xs uppercase tracking-[0.2em] border-b border-[#D4AF37] pb-2 hover:text-[#D4AF37] transition-colors flex items-center gap-2">
-                      Inquire About {services[activeService].title} <ArrowRight size={14} />
-                    </button>
+                  <p className="font-body text-sm md:text-base text-gray-400 leading-loose mb-12 max-w-xl opacity-0 animate-[fadeIn_0.5s_ease-out_0.1s_forwards]">
+                    {services[activeService].desc}
+                  </p>
+
+                  <div className="space-y-6">
+                    {services[activeService].features.map((feature, i) => (
+                      <div key={`feat-${i}`} className="flex items-center gap-6 border-b border-white/10 pb-6 opacity-0 animate-[fadeIn_0.5s_ease-out_0.2s_forwards]" style={{ animationDelay: `${0.1 * i}s` }}>
+                        <Check size={18} className="text-[#D4AF37]" />
+                        <span className="font-body text-xs md:text-sm uppercase tracking-widest text-white/80">{feature}</span>
+                      </div>
+                    ))}
                   </div>
-               </div>
+
+                  <button className="mt-16 self-start font-body text-xs uppercase tracking-[0.2em] border-b border-[#D4AF37] pb-2 hover:text-[#D4AF37] transition-colors flex items-center gap-2">
+                    Inquire About {services[activeService].title} <ArrowRight size={14} />
+                  </button>
+                </div>
+              </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      <section id="process" className="py-20 md:py-32 px-6 md:px-24 bg-[#EBE9E4]">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div className="reveal-on-scroll">
+              <span className="block text-[#D4AF37] font-body text-[10px] uppercase tracking-[0.3em] mb-4">
+                The Methodology
+              </span>
+              <h2 className="font-display text-4xl md:text-6xl text-[#1A1A1A] leading-[1.1] mb-8">
+                Orchestrating <br /> <span className="italic opacity-60">The Senses.</span>
+              </h2>
+            </div>
+            <div className="reveal-on-scroll space-y-6 font-body text-[13px] md:text-sm leading-loose text-[#1A1A1A]/70 text-justify">
+              <p>
+                True luxury is not just about what you see, but how you feel. Our design process is a meticulous orchestration of light, texture, and volume. We begin not with a floorplan, but with a conversation—uncovering the rituals and rhythms of your daily life.
+              </p>
+              <p>
+                We layer materials with intention. Rough limestone meets smooth silk; cold steel embraces warm walnut. This juxtaposition creates a tactile dialogue that engages the hand as much as the eye. Every joint, every seam, every shadow is considered.
+              </p>
+              <p>
+                From the initial concept sketches to the final placement of an antique vase, we manage the entire ecosystem of the project. We collaborate with the world's finest artisans—masons from Carrara, weavers from Kyoto, and cabinet makers from Copenhagen—to ensure that every element is bespoke and irreplaceable.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 md:mt-24 reveal-on-scroll">
+            {[
+              { title: "Concept", text: "We define the narrative direction, selecting a palette of materials and emotions that will guide the project." },
+              { title: "Development", text: "Technical precision meets artistic vision. We produce detailed architectural drawings and 3D renderings." },
+              { title: "Execution", text: "Rigorous project management ensures that the vision is realized without compromise, on time and on budget." }
+            ].map((step, i) => (
+              <div key={i} className="border-t border-[#1A1A1A]/10 pt-6">
+                <span className="font-display text-2xl text-[#1A1A1A] mb-4 block">0{i + 1}</span>
+                <h4 className="font-display text-xl mb-3">{step.title}</h4>
+                <p className="font-body text-xs leading-relaxed opacity-60 text-justify">{step.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -552,30 +591,30 @@ const App = () => {
       {/* =========================================
           PAGE 4: GALLERY (THE PORTFOLIO)
       ========================================= */}
-      <section id="gallery" className="py-20 md:py-32 px-6 bg-[#FDFBF7]">
+      <section id="portfolio" className="py-20 md:py-32 px-6 bg-[#FDFBF7]">
         <div className="container mx-auto">
           <div className="flex justify-between items-end mb-12 md:mb-16 border-b border-[#1A1A1A]/10 pb-6 reveal-on-scroll">
             <div>
-              <h2 className="font-display text-5xl md:text-8xl text-[#1A1A1A]">Curated<br/>Spaces</h2>
+              <h2 className="font-display text-5xl md:text-8xl text-[#1A1A1A]">Selected<br />Works</h2>
             </div>
             <div className="hidden md:block">
-              <p className="font-body text-xs uppercase tracking-widest text-right mb-2">Available for Acquisition</p>
-              <p className="font-script text-2xl text-[#D4AF37] text-right">Spring Collection 2025</p>
+              <p className="font-body text-xs uppercase tracking-widest text-right mb-2">Residential & Commercial</p>
+              <p className="font-script text-2xl text-[#D4AF37] text-right">Portfolio 2024-2025</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 md:gap-y-16">
             {galleryItems.map((item, index) => (
-              <div 
-                key={item.id} 
+              <div
+                key={item.id}
                 className={`group md:cursor-none ${index % 2 !== 0 ? 'md:mt-24' : ''}`}
-                onMouseEnter={() => handleCursorHover("View Home")} 
+                onMouseEnter={() => handleCursorHover("View Home")}
                 onMouseLeave={handleCursorLeave}
               >
                 <div className="relative overflow-hidden mb-6 aspect-[4/3]">
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
+                  <img
+                    src={item.image}
+                    alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-110"
                   />
                   <div className="absolute top-6 left-6 bg-[#FDFBF7] px-4 py-2 flex items-center gap-2">
@@ -583,7 +622,7 @@ const App = () => {
                     <span className="font-body text-[10px] uppercase tracking-wider">{item.location}</span>
                   </div>
                 </div>
-                
+
                 <div className="flex justify-between items-start border-t border-[#1A1A1A] pt-4 transition-all duration-300 group-hover:border-[#D4AF37]">
                   <div>
                     <h3 className="font-display text-2xl md:text-3xl group-hover:italic transition-all">{item.title}</h3>
@@ -593,7 +632,7 @@ const App = () => {
                     <p className="font-display text-lg md:text-xl">{item.price}</p>
                     {/* Always visible on mobile, hover only on desktop */}
                     <button className="opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity font-body text-[9px] uppercase tracking-[0.2em] mt-2 border-b border-black">
-                      Schedule Tour
+                      View Project
                     </button>
                   </div>
                 </div>
@@ -603,7 +642,7 @@ const App = () => {
 
           <div className="mt-16 md:mt-24 text-center">
             <button className="px-12 py-4 border border-[#1A1A1A] rounded-full font-body text-[10px] md:text-xs uppercase tracking-[0.2em] hover:bg-[#1A1A1A] hover:text-[#FDFBF7] transition-all duration-300">
-              View All 42 Listings
+              View All Projects
             </button>
           </div>
         </div>
@@ -613,151 +652,151 @@ const App = () => {
           PAGE 5: CONTACT & BOOKING
       ========================================= */}
       <section id="contact" className="py-20 md:py-32 px-6 md:px-12 bg-[#EBE9E4] relative">
-         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
-           
-           {/* Info Side */}
-           <div className="reveal-on-scroll">
-              <h2 className="font-display text-5xl md:text-8xl leading-none mb-8 md:mb-12">
-                Begin the <br/> Conversation
-              </h2>
-              <p className="font-body text-[13px] md:text-sm leading-loose text-[#1A1A1A]/70 mb-8 md:mb-12 max-w-md">
-                Whether you are looking to acquire a new sanctuary or list a property of distinction, our team is ready to provide a seamless experience.
-              </p>
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
 
-              <div className="space-y-6 md:space-y-8">
-                <div className="flex gap-4 items-start">
-                   <div className="bg-[#1A1A1A] text-[#FDFBF7] p-3 rounded-full">
-                     <MapPin size={20} />
-                   </div>
-                   <div>
-                     <h4 className="font-display text-lg md:text-xl">Headquarters</h4>
-                     <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">1001 Fifth Avenue,<br/>New York, NY 10028</p>
-                   </div>
+          {/* Info Side */}
+          <div className="reveal-on-scroll">
+            <h2 className="font-display text-5xl md:text-8xl leading-none mb-8 md:mb-12">
+              Start a <br /> Project
+            </h2>
+            <p className="font-body text-[13px] md:text-sm leading-loose text-[#1A1A1A]/70 mb-8 md:mb-12 max-w-md">
+              Whether you are looking to refresh a single room or redesign your entire home, our team is ready to bring your vision to life.
+            </p>
+
+            <div className="space-y-6 md:space-y-8">
+              <div className="flex gap-4 items-start">
+                <div className="bg-[#1A1A1A] text-[#FDFBF7] p-3 rounded-full">
+                  <MapPin size={20} />
                 </div>
-                
-                <div className="flex gap-4 items-start">
-                   <div className="bg-[#1A1A1A] text-[#FDFBF7] p-3 rounded-full">
-                     <Phone size={20} />
-                   </div>
-                   <div>
-                     <h4 className="font-display text-lg md:text-xl">Private Line</h4>
-                     <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">+1 (212) 555-0198</p>
-                   </div>
+                <div>
+                  <h4 className="font-display text-lg md:text-xl">Headquarters</h4>
+                  <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">1001 Fifth Avenue,<br />New York, NY 10028</p>
                 </div>
               </div>
-           </div>
 
-           {/* Booking Form */}
-           <div className="bg-[#FDFBF7] p-6 md:p-12 shadow-2xl reveal-on-scroll relative overflow-hidden">
-             {/* Decorative line */}
-             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37] to-transparent"></div>
+              <div className="flex gap-4 items-start">
+                <div className="bg-[#1A1A1A] text-[#FDFBF7] p-3 rounded-full">
+                  <Phone size={20} />
+                </div>
+                <div>
+                  <h4 className="font-display text-lg md:text-xl">Private Line</h4>
+                  <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">+1 (212) 555-0198</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-             <div className="mb-8 flex justify-between items-end">
-                <h3 className="font-display text-2xl md:text-3xl">Consultation</h3>
-                <span className="font-body text-[9px] md:text-[10px] uppercase tracking-widest text-[#D4AF37]">
-                  Step {bookingStep} of 2
-                </span>
-             </div>
+          {/* Booking Form */}
+          <div className="bg-[#FDFBF7] p-6 md:p-12 shadow-2xl reveal-on-scroll relative overflow-hidden">
+            {/* Decorative line */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37] to-transparent"></div>
 
-             {bookingStep === 1 ? (
-               <div className="space-y-6 animate-[fadeIn_0.5s_ease-out]">
-                 <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                       <label className="text-[9px] uppercase tracking-widest font-bold">First Name</label>
-                       <input type="text" className="w-full bg-[#EBE9E4]/30 border-b border-[#1A1A1A]/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm" placeholder="John" />
-                    </div>
-                    <div className="space-y-2">
-                       <label className="text-[9px] uppercase tracking-widest font-bold">Last Name</label>
-                       <input type="text" className="w-full bg-[#EBE9E4]/30 border-b border-[#1A1A1A]/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm" placeholder="Doe" />
-                    </div>
-                 </div>
-                 
-                 <div className="space-y-2">
-                    <label className="text-[9px] uppercase tracking-widest font-bold">Email Address</label>
-                    <input type="email" className="w-full bg-[#EBE9E4]/30 border-b border-[#1A1A1A]/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm" placeholder="john@example.com" />
-                 </div>
+            <div className="mb-8 flex justify-between items-end">
+              <h3 className="font-display text-2xl md:text-3xl">Consultation</h3>
+              <span className="font-body text-[9px] md:text-[10px] uppercase tracking-widest text-[#D4AF37]">
+                Step {bookingStep} of 2
+              </span>
+            </div>
 
-                 <div className="space-y-2">
-                    <label className="text-[9px] uppercase tracking-widest font-bold">I am Interested In</label>
-                    <div className="flex gap-2 md:gap-4 mt-2">
-                      {['Buying', 'Selling', 'Design'].map(opt => (
-                        <button 
-                          key={opt}
-                          onClick={() => setFormData({...formData, interest: opt})}
-                          className={`flex-1 py-3 text-[10px] md:text-xs uppercase tracking-wider border transition-all
+            {bookingStep === 1 ? (
+              <div className="space-y-6 animate-[fadeIn_0.5s_ease-out]">
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[9px] uppercase tracking-widest font-bold">First Name</label>
+                    <input type="text" className="w-full bg-[#EBE9E4]/30 border-b border-[#1A1A1A]/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm" placeholder="John" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[9px] uppercase tracking-widest font-bold">Last Name</label>
+                    <input type="text" className="w-full bg-[#EBE9E4]/30 border-b border-[#1A1A1A]/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm" placeholder="Doe" />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[9px] uppercase tracking-widest font-bold">Email Address</label>
+                  <input type="email" className="w-full bg-[#EBE9E4]/30 border-b border-[#1A1A1A]/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm" placeholder="john@example.com" />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[9px] uppercase tracking-widest font-bold">I am Interested In</label>
+                  <div className="flex gap-2 md:gap-4 mt-2">
+                    {['Residential', 'Commercial', 'Consultation'].map(opt => (
+                      <button
+                        key={opt}
+                        onClick={() => setFormData({ ...formData, interest: opt })}
+                        className={`flex-1 py-3 text-[10px] md:text-xs uppercase tracking-wider border transition-all
                             ${formData.interest === opt ? 'bg-[#1A1A1A] text-[#FDFBF7] border-[#1A1A1A]' : 'border-[#1A1A1A]/20 hover:border-[#1A1A1A]'}`}
-                        >
-                          {opt}
-                        </button>
-                      ))}
-                    </div>
-                 </div>
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
-                 <button 
-                   onClick={() => setBookingStep(2)}
-                   className="w-full bg-[#D4AF37] text-white py-4 mt-4 font-body text-xs uppercase tracking-[0.2em] hover:bg-[#b89528] transition-colors flex justify-center items-center gap-2"
-                 >
-                   Select Time Slot <ArrowRight size={14} />
-                 </button>
-               </div>
-             ) : (
-               <div className="animate-[fadeIn_0.5s_ease-out]">
-                 <p className="font-body text-xs text-gray-500 mb-6">Please select a preferred time for a 30-minute discovery call.</p>
-                 
-                 <div className="grid grid-cols-2 gap-3 mb-8">
-                   {timeSlots.map(slot => (
-                     <button
-                       key={slot}
-                       onClick={() => setSelectedSlot(slot)}
-                       className={`py-3 px-2 md:px-4 border text-[10px] md:text-xs font-body transition-all flex justify-between items-center
-                         ${selectedSlot === slot 
-                            ? 'bg-[#1A1A1A] text-[#FDFBF7] border-[#1A1A1A]' 
-                            : 'border-[#1A1A1A]/10 hover:border-[#1A1A1A] text-[#1A1A1A]'}`}
-                     >
-                       {slot}
-                       {selectedSlot === slot && <Check size={12} />}
-                     </button>
-                   ))}
-                 </div>
-                 
-                 <div className="flex gap-4">
-                   <button 
-                     onClick={() => setBookingStep(1)}
-                     className="flex-1 py-4 border border-[#1A1A1A]/20 font-body text-xs uppercase tracking-[0.2em] hover:bg-[#EBE9E4] transition-colors"
-                   >
-                     Back
-                   </button>
-                   <button 
-                     className="flex-[2] bg-[#1A1A1A] text-white py-4 font-body text-xs uppercase tracking-[0.2em] hover:bg-black transition-colors"
-                     onClick={() => alert("Request sent! We will contact you shortly.")}
-                   >
-                     Confirm Request
-                   </button>
-                 </div>
-               </div>
-             )}
-           </div>
-         </div>
+                <button
+                  onClick={() => setBookingStep(2)}
+                  className="w-full bg-[#D4AF37] text-white py-4 mt-4 font-body text-xs uppercase tracking-[0.2em] hover:bg-[#b89528] transition-colors flex justify-center items-center gap-2"
+                >
+                  Select Time Slot <ArrowRight size={14} />
+                </button>
+              </div>
+            ) : (
+              <div className="animate-[fadeIn_0.5s_ease-out]">
+                <p className="font-body text-xs text-gray-500 mb-6">Please select a preferred time for a 30-minute discovery call.</p>
+
+                <div className="grid grid-cols-2 gap-3 mb-8">
+                  {timeSlots.map(slot => (
+                    <button
+                      key={slot}
+                      onClick={() => setSelectedSlot(slot)}
+                      className={`py-3 px-2 md:px-4 border text-[10px] md:text-xs font-body transition-all flex justify-between items-center
+                         ${selectedSlot === slot
+                          ? 'bg-[#1A1A1A] text-[#FDFBF7] border-[#1A1A1A]'
+                          : 'border-[#1A1A1A]/10 hover:border-[#1A1A1A] text-[#1A1A1A]'}`}
+                    >
+                      {slot}
+                      {selectedSlot === slot && <Check size={12} />}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="flex gap-4">
+                  <button
+                    onClick={() => setBookingStep(1)}
+                    className="flex-1 py-4 border border-[#1A1A1A]/20 font-body text-xs uppercase tracking-[0.2em] hover:bg-[#EBE9E4] transition-colors"
+                  >
+                    Back
+                  </button>
+                  <button
+                    className="flex-[2] bg-[#1A1A1A] text-white py-4 font-body text-xs uppercase tracking-[0.2em] hover:bg-black transition-colors"
+                    onClick={() => alert("Request sent! We will contact you shortly.")}
+                  >
+                    Confirm Request
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </section>
 
       {/* --- FOOTER --- */}
       <footer className="bg-[#1A1A1A] text-[#FDFBF7] pt-16 md:pt-24 pb-8 border-t border-white/10">
         <div className="container mx-auto px-6 md:px-12 text-center">
-           <h2 className="font-display text-[15vw] md:text-[12vw] leading-none opacity-20 select-none">ARCHITECTURA</h2>
-           
-           <div className="flex flex-col md:flex-row justify-between items-center mt-8 md:mt-12 pt-8 border-t border-white/10 font-body text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-white/40">
-             <p className="mb-4 md:mb-0">&copy; 2025 Architectura Real Estate</p>
-             <div className="flex gap-6 md:gap-8">
-               <a href="#" className="hover:text-[#D4AF37] transition-colors">Privacy</a>
-               <a href="#" className="hover:text-[#D4AF37] transition-colors">Terms</a>
-               <a href="#" className="hover:text-[#D4AF37] transition-colors">Sitemap</a>
-             </div>
-           </div>
+          <h2 className="font-display text-[15vw] md:text-[12vw] leading-none opacity-20 select-none">AESTHETICA</h2>
+
+          <div className="flex flex-col md:flex-row justify-between items-center mt-8 md:mt-12 pt-8 border-t border-white/10 font-body text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-white/40">
+            <p className="mb-4 md:mb-0">&copy; 2025 Aesthetica Interiors</p>
+            <div className="flex gap-6 md:gap-8">
+              <a href="#" className="hover:text-[#D4AF37] transition-colors">Privacy</a>
+              <a href="#" className="hover:text-[#D4AF37] transition-colors">Terms</a>
+              <a href="#" className="hover:text-[#D4AF37] transition-colors">Sitemap</a>
+            </div>
+          </div>
         </div>
       </footer>
 
       {/* --- SCROLL PROGRESS LINE --- */}
-      <div 
+      <div
         className="fixed bottom-0 left-0 h-[4px] bg-[#D4AF37] z-50 transition-all duration-100 ease-out shadow-[0_0_10px_#D4AF37]"
         style={{ width: `${scrollProgress * 100}%` }}
       />
