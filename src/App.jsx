@@ -4,9 +4,16 @@ import {
   Armchair, Building, Calendar, Clock, Check,
   ArrowRight, Mail, Phone, Instagram, Linkedin, Facebook
 } from 'lucide-react';
+import NohaLogo from './assets/Noha_logo.jpeg';
+import Work1 from './assets/work1.jpeg';
+import Work2 from './assets/work2.jpeg';
+import Work3 from './assets/work3.jpeg';
+import Work4 from './assets/work4.jpeg';
+import Work5 from './assets/work5.jpeg';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 
 /**
- * AESTHETICA - Ultra Luxury Interior Design
+ * NOHA INTERIORS - Luxury Interior Design
  * --------------------------------------------------
  * Design Philosophy: Minimalist Luxury, Editorial Typography, Fluid Motion.
  * Font Stack: Italiana (Headings), Monsieur La Doulaise (Script), Montserrat (Body).
@@ -19,7 +26,6 @@ const App = () => {
   const [activeCursor, setActiveCursor] = useState(false);
   const [cursorText, setCursorText] = useState("View");
   const [activeService, setActiveService] = useState(0);
-
   // Form State
   const [bookingStep, setBookingStep] = useState(1);
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -38,43 +44,18 @@ const App = () => {
   // --- ANIMATION LOOPS & LISTENERS ---
 
   // 1. Scroll Progress & Parallax
+  const { scrollY } = useScroll();
+  const yHero = useTransform(scrollY, [0, 1000], [0, 300]);
+
   useEffect(() => {
-    let rafId = null;
     const handleScroll = () => {
-      rafId = requestAnimationFrame(() => {
-        const totalScroll = document.documentElement.scrollTop;
-        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        setScrollProgress(totalScroll / windowHeight);
-
-        // Simple Parallax for hero images
-        // We reduce parallax intensity on mobile for smoother performance
-        const isMobile = window.innerWidth < 768;
-        const parallaxElements = document.querySelectorAll('.parallax');
-
-        parallaxElements.forEach(el => {
-          const speed = isMobile ? 0.2 : (el.getAttribute('data-speed') || 0.5);
-          if (el) {
-            el.style.transform = `translateY(${totalScroll * speed}px)`;
-          }
-        });
-
-        // Reveal on Scroll
-        const reveals = document.querySelectorAll('.reveal-on-scroll');
-        reveals.forEach(el => {
-          const elementTop = el.getBoundingClientRect().top;
-          const elementVisible = 100; // Trigger slightly earlier on mobile
-          if (elementTop < window.innerHeight - elementVisible) {
-            el.classList.add('active');
-          }
-        });
-      });
+      const totalScroll = window.scrollY;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      setScrollProgress(totalScroll / windowHeight);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // 2. Custom Physics Cursor (Desktop Only)
@@ -151,35 +132,33 @@ const App = () => {
   const galleryItems = [
     {
       id: 1,
-      title: "The Obsidian Lounge",
-      location: "Kyoto, Japan",
-      price: "Completed 2024",
-      image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200",
-      specs: "Custom Joinery | Dark Oak"
+      title: "Modular Kitchen Elegance",
+      image: Work1,
+      specs: "L-Shaped Layout | Hexagonal Backsplash"
     },
     {
       id: 2,
-      title: "Serenity Suite",
-      location: "Copenhagen, DK",
-      price: "Completed 2023",
-      image: "https://plus.unsplash.com/premium_photo-1661963630748-3de7ab820570?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      specs: "Minimalist | Natural Light"
+      title: "The Panoramic Kitchen",
+      image: Work2,
+      specs: "U-Shaped Design | Ambient Ceiling Lighting"
     },
     {
       id: 3,
-      title: "Azure Atelier",
-      location: "Paris, France",
-      price: "Completed 2024",
-      image: "https://images.unsplash.com/photo-1616137466211-f939a420be84?auto=format&fit=crop&q=80&w=1200",
-      specs: "Haussmann Style | Velvet"
+      title: "Contemporary Culinary Corner",
+      image: Work3,
+      specs: "Fluted Glass Cabinets | Built-In Appliances"
     },
     {
       id: 4,
-      title: "Urban Sanctuary",
-      location: "New York, NY",
-      price: "In Progress",
-      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200",
-      specs: "Industrial Zen | Concrete"
+      title: "Tropical Retreat Bedroom",
+      image: Work4,
+      specs: "Rattan Wardrobe | Botanical Accent Wall"
+    },
+    {
+      id: 5,
+      title: "Serene Minimal Bedroom",
+      image: Work5,
+      specs: "Cane Headboard | Pendant Lighting"
     }
   ];
 
@@ -211,27 +190,12 @@ const App = () => {
           .font-body { font-family: 'Montserrat', sans-serif; }
           
           html { scroll-behavior: smooth; }
-          ::-webkit-scrollbar { width: 4px; }
-          ::-webkit-scrollbar-track { background: #FDFBF7; }
-          ::-webkit-scrollbar-thumb { background: #D4AF37; }
+          ::-webkit-scrollbar { width: 6px; }
+          ::-webkit-scrollbar-track { background: #0f0f0f; }
+          ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
 
-          .reveal-up {
-            animation: slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-            transform: translateY(60px);
-          }
-
-          .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s ease-out;
-          }
-          .reveal-on-scroll.active {
-            opacity: 1;
-            transform: translateY(0);
-          }
-          
-          @keyframes slideUp {
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
           }
         `}
@@ -245,7 +209,7 @@ const App = () => {
         <div
           className={`
             relative -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border border-[#FDFBF7] transition-all duration-300 ease-out
-            ${activeCursor ? 'w-32 h-32 bg-[#FDFBF7] text-[#1A1A1A] scale-100' : 'w-5 h-5 bg-transparent scale-100'}
+            ${activeCursor ? 'w-32 h-32 bg-[#FDFBF7] text-[#1A1A1A] scale-100' : 'w-4 h-4 bg-[#D4AF37] scale-100'}
           `}
         >
           <span className={`text-xs font-bold uppercase tracking-widest transition-opacity duration-200 ${activeCursor ? 'opacity-100' : 'opacity-0'}`}>
@@ -260,22 +224,19 @@ const App = () => {
       </div>
 
       {/* --- NAVIGATION --- */}
-      <nav className="fixed w-full z-50 px-6 py-6 md:px-12 md:py-8 flex justify-between items-center mix-blend-difference text-[#FDFBF7]">
+      <nav className="fixed w-full z-50 px-6 py-6 md:px-12 md:py-8 flex justify-between items-center text-[#FDFBF7]">
         <div className="flex flex-col group cursor-pointer" onMouseEnter={() => handleCursorHover("Home")} onMouseLeave={handleCursorLeave}>
-          <span className="font-display text-2xl tracking-[0.2em]">
-            AESTHETICA
-          </span>
-          <span className="text-[9px] md:text-[8px] uppercase tracking-[0.3em] md:tracking-[0.4em] font-body opacity-80 mt-1 text-[#D4AF37]">
-            Interior Design Studio
-          </span>
+          <img src={NohaLogo} alt="Noha Interiors" className="h-12 md:h-16 w-auto object-contain mix-blend-multiply" />
         </div>
 
-        <div className="flex items-center gap-8">
-          <button className="hidden md:block font-body text-[10px] uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">
+        <div className="flex items-center gap-8 mix-blend-difference">
+          <button className="hidden md:block font-body text-xs uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors relative group">
             Portfolio
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
           </button>
-          <button className="hidden md:block font-body text-[10px] uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors">
+          <button className="hidden md:block font-body text-xs uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors relative group">
             Journal
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
           </button>
 
           <button
@@ -324,45 +285,65 @@ const App = () => {
       <header id="residence" className="relative h-[100dvh] flex flex-col justify-center items-center px-6 overflow-hidden">
 
         {/* Parallax Background */}
-        <div className="absolute inset-0 z-0 parallax" data-speed="0.5">
+        <motion.div
+          className="absolute inset-0 z-0"
+          style={{ y: yHero }}
+        >
           <img
             src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=2500"
             alt="Luxury Architecture"
+            loading="eager"
+            decoding="async"
             className="w-full h-[120%] object-cover"
           />
           <div className="absolute inset-0 bg-black/30"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/50 via-transparent to-transparent"></div>
-        </div>
+        </motion.div>
 
         <div className="z-10 text-center relative mt-20 w-full max-w-[90vw]">
-          <div className="flex items-center justify-center gap-4 mb-8 md:mb-12 reveal-up" style={{ animationDelay: '0.1s' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center justify-center gap-4 mb-8 md:mb-12"
+          >
             <span className="h-[1px] w-8 md:w-12 bg-[#FDFBF7]"></span>
-            <p className="font-body text-[10px] md:text-xs tracking-[0.4em] uppercase text-[#FDFBF7]">
-              Since 1985
+            <p className="font-body text-xs md:text-sm tracking-[0.4em] uppercase text-[#FDFBF7] drop-shadow-lg">
+              Est. 2024
             </p>
             <span className="h-[1px] w-8 md:w-12 bg-[#FDFBF7]"></span>
-          </div>
+          </motion.div>
 
-          <h1 className="font-display text-[15vw] md:text-[10rem] leading-[0.8] text-[#FDFBF7] reveal-up mix-blend-overlay" style={{ animationDelay: '0.2s' }}>
-            ATMOSPHERE
-          </h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="font-display text-[15vw] md:text-[10rem] leading-[0.8] text-[#FDFBF7] mix-blend-overlay"
+          >
+            DEFINING
+          </motion.h1>
 
           <div className="relative">
-            <h2 className="font-script text-[12vw] md:text-9xl text-[#D4AF37] reveal-up -mt-2 md:-mt-12 relative z-20" style={{ animationDelay: '0.4s' }}>
-              Art of Living
-            </h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="font-script text-[12vw] md:text-9xl text-[#D4AF37] -mt-2 md:-mt-12 relative z-20"
+            >
+              True Elegance
+            </motion.h2>
           </div>
 
-          <p className="font-body text-[11px] md:text-sm text-[#FDFBF7]/80 max-w-[80vw] md:max-w-md mx-auto mt-6 md:mt-8 tracking-widest leading-relaxed reveal-up" style={{ animationDelay: '0.6s' }}>
-            Crafting bespoke environments that transcend the ordinary. Where space becomes emotion.
-          </p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
+            className="font-body text-[11px] md:text-sm text-[#FDFBF7]/80 max-w-[80vw] md:max-w-md mx-auto mt-6 md:mt-8 tracking-widest leading-relaxed"
+          >
+            Curating spaces that transcend the ordinary. Where vision meets reality in a symphony of luxury.
+          </motion.p>
 
-          <div className="mt-12 md:mt-16 reveal-up" style={{ animationDelay: '0.8s' }}>
-            <a href="#portfolio"
-              className="inline-block border border-[#FDFBF7]/30 px-6 py-3 md:px-8 md:py-3 rounded-full text-[#FDFBF7] font-body text-[10px] md:text-xs uppercase tracking-[0.2em] hover:bg-[#FDFBF7] hover:text-[#1A1A1A] transition-all duration-300">
-              View Projects
-            </a>
-          </div>
+
         </div>
 
         <div className="absolute bottom-8 right-6 md:bottom-12 md:right-12 hidden md:flex flex-col items-end text-[#FDFBF7]/60 z-10">
@@ -374,22 +355,23 @@ const App = () => {
       {/* =========================================
           PAGE 2: ABOUT US (PHILOSOPHY)
       ========================================= */}
-      <section id="philosophy" className="py-20 md:py-32 px-6 md:px-24 bg-[#FDFBF7] relative">
+      <section id="philosophy" className="py-20 md:py-24 px-6 md:px-24 bg-[#FDFBF7] relative z-10 overflow-hidden border-b border-[#1A1A1A]/5">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16 items-center">
 
             {/* Left Text */}
-            <div className="lg:col-span-5 reveal-on-scroll">
-              <span className="block text-[#D4AF37] font-body text-[10px] uppercase tracking-[0.3em] mb-4 md:mb-6">
+            <div className="lg:col-span-5 pr-0 lg:pr-12">
+              <span className="block text-[#D4AF37] font-body text-xs uppercase tracking-[0.3em] mb-4 md:mb-6">
                 Our Philosophy
               </span>
               <h2 className="font-display text-4xl md:text-7xl text-[#1A1A1A] leading-[1.1] mb-6 md:mb-8">
                 We don't just design spaces. <br />
-                <span className="italic opacity-60">We curate lifestyles.</span>
+                <span className="italic opacity-60 font-script text-5xl md:text-8xl block mt-2">We curate lifestyles.</span>
               </h2>
-              <div className="space-y-4 md:space-y-6 text-[#1A1A1A]/70 font-body text-[13px] md:text-sm leading-loose text-justify">
+              <div className="space-y-6 md:space-y-8 text-[#1A1A1A]/80 font-body text-sm md:text-base leading-relaxed text-justify relative">
+                <div className="absolute top-0 left-0 w-[1px] h-full bg-[#1A1A1A]/10 -ml-6 hidden md:block"></div>
                 <p>
-                  At Aesthetica, we believe that a home is more than a structure; it is the physical manifestation of your inner world. Founded on the principles of sensory depth and aesthetic mastery, we bridge the gap between architectural form and human emotion.
+                  At Noha Interiors, we believe that a home is more than a structure; it is the physical manifestation of your inner world. Founded on the principles of sensory depth and aesthetic mastery, we bridge the gap between architectural form and human emotion.
                 </p>
                 <p>
                   Our team consists of interior architects, textile specialists, and art curators who understand the nuance of luxury. We see the potential in every shadow, the value in every texture, and the story in every curated corner.
@@ -397,20 +379,18 @@ const App = () => {
               </div>
 
               <div className="mt-8 md:mt-12 flex items-center gap-4">
-                <img
-                  src="https://randomuser.me/api/portraits/men/32.jpg"
-                  alt="Founder"
-                  className="w-10 h-10 md:w-12 md:h-12 rounded-full grayscale"
-                />
+                <div className="bg-[#1A1A1A] text-[#FDFBF7] w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center">
+                  <Building size={20} />
+                </div>
                 <div>
-                  <p className="font-display text-base md:text-lg text-[#1A1A1A]">Jonathan Sterling</p>
-                  <p className="font-body text-[8px] md:text-[9px] uppercase tracking-widest text-[#1A1A1A]/50">Founder & Principal Architect</p>
+                  <p className="font-display text-base md:text-lg text-[#1A1A1A]">Noha Interiors</p>
+                  <p className="font-body text-[8px] md:text-[9px] uppercase tracking-widest text-[#1A1A1A]/50">Karunagapally, Kerala</p>
                 </div>
               </div>
             </div>
 
             {/* Right Image Grid */}
-            <div className="lg:col-span-7 relative reveal-on-scroll">
+            <div className="lg:col-span-7 relative">
               <div className="grid grid-cols-2 gap-3 md:gap-4">
                 <div className="space-y-3 md:space-y-4 mt-8 md:mt-12">
                   <img
@@ -445,30 +425,43 @@ const App = () => {
       {/* =========================================
           PAGE 3: SERVICES (ACCORDION ON MOBILE, SPLIT ON DESKTOP)
       ========================================= */}
-      <section   id="services" className="py-20 md:py-32 bg-[#111111] text-[#FDFBF7] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.05]"
+      <section id="services" className="py-20 md:py-24 bg-[#111111] text-[#FDFBF7] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}>
         </div>
 
         <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <div className="text-center mb-16 md:mb-24 reveal-on-scroll">
-            <span className="text-[#D4AF37] font-body text-[10px] uppercase tracking-[0.3em]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16 md:mb-20"
+          >
+            <span className="text-[#D4AF37] font-body text-xs uppercase tracking-[0.3em]">
               Holistic Approach
             </span>
-            <h2 className="font-display text-4xl md:text-7xl mt-4">
+            <h2 className="font-display text-4xl md:text-6xl mt-4">
               Our Services
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
             {/* Service Selection List (Left Column) + Mobile Content */}
-            <div className="lg:col-span-5 space-y-4 reveal-on-scroll">
+            <div className="lg:col-span-5 space-y-4">
               {services.map((service, index) => (
-                <div key={index} className="group">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group"
+                >
                   {/* Header Button */}
                   <div
-                    onClick={() => setActiveService(index)}
+                    onClick={() => setActiveService(activeService === index ? null : index)}
                     className={`p-6 md:p-8 border border-white/10 cursor-pointer transition-all duration-500 hover:bg-white/5 relative overflow-hidden
                       ${activeService === index ? 'bg-white/5 border-[#D4AF37]/50' : ''}`}
                   >
@@ -478,8 +471,8 @@ const App = () => {
                           {service.id}
                         </span>
                         <div>
-                          <h3 className="font-display text-xl md:text-2xl group-hover:italic transition-all duration-300">{service.title}</h3>
-                          <p className="font-body text-[9px] md:text-[10px] uppercase tracking-widest text-white/50">{service.subtitle}</p>
+                          <h3 className="font-display text-xl md:text-3xl group-hover:italic transition-all duration-300">{service.title}</h3>
+                          <p className="font-body text-[10px] md:text-xs uppercase tracking-widest text-white/50 mt-1">{service.subtitle}</p>
                         </div>
                       </div>
                       <ArrowRight className={`transition-all duration-500 transform ${activeService === index ? 'rotate-90 lg:rotate-0 translate-x-0 opacity-100 text-[#D4AF37]' : '-translate-x-2 md:-translate-x-4 opacity-0 lg:group-hover:opacity-50'}`} />
@@ -508,29 +501,35 @@ const App = () => {
                       </button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
             {/* Service Detail Card (Right Column - Desktop Sticky) */}
             <div className="hidden lg:block lg:col-span-7 relative sticky-container">
-              <div className="relative h-full min-h-[500px] bg-[#1A1A1A] p-8 md:p-16 border border-white/5 reveal-on-scroll flex flex-col justify-center lg:sticky lg:top-32 transition-all duration-700">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="relative h-full min-h-[500px] bg-[#1A1A1A] p-8 md:p-16 border border-white/5 flex flex-col justify-center lg:sticky lg:top-32 transition-all duration-700"
+              >
                 <div className="absolute top-0 right-0 p-8 md:p-12 text-[#D4AF37] opacity-20">
-                  {services[activeService].icon}
+                  {services[activeService !== null ? activeService : 0].icon}
                 </div>
 
-                <div key={`content-${activeService}`} className="animate-[fadeIn_0.6s_ease-out]">
-                  <h3 className="font-script text-6xl md:text-8xl text-[#D4AF37] mb-8 opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
-                    {services[activeService].title}
+                <div key={`content-${activeService}`}>
+                  <h3 className="font-script text-6xl md:text-8xl text-[#D4AF37] mb-8 animate-[fadeIn_0.5s_ease-out_forwards]">
+                    {services[activeService !== null ? activeService : 0].title}
                   </h3>
 
-                  <p className="font-body text-sm md:text-base text-gray-400 leading-loose mb-12 max-w-xl opacity-0 animate-[fadeIn_0.5s_ease-out_0.1s_forwards]">
-                    {services[activeService].desc}
+                  <p className="font-body text-base md:text-lg text-gray-300 leading-relaxed mb-12 max-w-xl animate-[fadeIn_0.5s_ease-out_0.1s_forwards]">
+                    {services[activeService !== null ? activeService : 0].desc}
                   </p>
 
                   <div className="space-y-6">
-                    {services[activeService].features.map((feature, i) => (
-                      <div key={`feat-${i}`} className="flex items-center gap-6 border-b border-white/10 pb-6 opacity-0 animate-[fadeIn_0.5s_ease-out_0.2s_forwards]" style={{ animationDelay: `${0.1 * i}s` }}>
+                    {services[activeService !== null ? activeService : 0].features.map((feature, i) => (
+                      <div key={`feat-${i}`} className="flex items-center gap-6 border-b border-white/10 pb-6 animate-[fadeIn_0.5s_ease-out_forwards]" style={{ animationDelay: `${0.15 * i}s` }}>
                         <Check size={18} className="text-[#D4AF37]" />
                         <span className="font-body text-xs md:text-sm uppercase tracking-widest text-white/80">{feature}</span>
                       </div>
@@ -538,28 +537,40 @@ const App = () => {
                   </div>
 
                   <button className="mt-16 self-start font-body text-xs uppercase tracking-[0.2em] border-b border-[#D4AF37] pb-2 hover:text-[#D4AF37] transition-colors flex items-center gap-2">
-                    Inquire About {services[activeService].title} <ArrowRight size={14} />
+                    Inquire About {services[activeService !== null ? activeService : 0].title} <ArrowRight size={14} />
                   </button>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
           </div>
         </div>
       </section>
 
-      <section id="process" className="py-20 md:py-32 px-6 md:px-24 bg-[#EBE9E4]">
+      <section id="process" className="py-20 md:py-24 px-6 md:px-24 bg-[#EBE9E4]">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div className="reveal-on-scroll">
-              <span className="block text-[#D4AF37] font-body text-[10px] uppercase tracking-[0.3em] mb-4">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.8 }}
+            >
+              <span className="block text-[#D4AF37] font-body text-xs uppercase tracking-[0.3em] mb-4">
                 The Methodology
               </span>
               <h2 className="font-display text-4xl md:text-6xl text-[#1A1A1A] leading-[1.1] mb-8">
-                Orchestrating <br /> <span className="italic opacity-60">The Senses.</span>
+                Orchestrating <br /> <span className="italic opacity-60 font-script text-6xl md:text-7xl block mt-2">The Senses.</span>
               </h2>
-            </div>
-            <div className="reveal-on-scroll space-y-6 font-body text-[13px] md:text-sm leading-loose text-[#1A1A1A]/70 text-justify">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="space-y-6 font-body text-sm md:text-base leading-relaxed text-[#1A1A1A]/80 text-justify relative"
+            >
+              <div className="absolute top-0 -left-8 w-[1px] h-full bg-[#1A1A1A]/10 hidden lg:block"></div>
               <p>
                 True luxury is not just about what you see, but how you feel. Our design process is a meticulous orchestration of light, texture, and volume. We begin not with a floorplan, but with a conversation—uncovering the rituals and rhythms of your daily life.
               </p>
@@ -569,20 +580,27 @@ const App = () => {
               <p>
                 From the initial concept sketches to the final placement of an antique vase, we manage the entire ecosystem of the project. We collaborate with the world's finest artisans—masons from Carrara, weavers from Kyoto, and cabinet makers from Copenhagen—to ensure that every element is bespoke and irreplaceable.
               </p>
-            </div>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 md:mt-24 reveal-on-scroll">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 md:mt-24">
             {[
               { title: "Concept", text: "We define the narrative direction, selecting a palette of materials and emotions that will guide the project." },
               { title: "Development", text: "Technical precision meets artistic vision. We produce detailed architectural drawings and 3D renderings." },
               { title: "Execution", text: "Rigorous project management ensures that the vision is realized without compromise, on time and on budget." }
             ].map((step, i) => (
-              <div key={i} className="border-t border-[#1A1A1A]/10 pt-6">
-                <span className="font-display text-2xl text-[#1A1A1A] mb-4 block">0{i + 1}</span>
-                <h4 className="font-display text-xl mb-3">{step.title}</h4>
-                <p className="font-body text-xs leading-relaxed opacity-60 text-justify">{step.text}</p>
-              </div>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.2 }}
+                className="border-t border-[#1A1A1A]/10 pt-6 pr-4"
+              >
+                <span className="font-display text-3xl text-[#D4AF37]/50 mb-4 block">0{i + 1}</span>
+                <h4 className="font-display text-2xl mb-3">{step.title}</h4>
+                <p className="font-body text-sm leading-relaxed opacity-70 text-justify">{step.text}</p>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -593,21 +611,31 @@ const App = () => {
       ========================================= */}
       <section id="portfolio" className="py-20 md:py-32 px-6 bg-[#FDFBF7]">
         <div className="container mx-auto">
-          <div className="flex justify-between items-end mb-12 md:mb-16 border-b border-[#1A1A1A]/10 pb-6 reveal-on-scroll">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.8 }}
+            className="flex justify-between items-end mb-12 md:mb-16 border-b border-[#1A1A1A]/10 pb-6"
+          >
             <div>
               <h2 className="font-display text-5xl md:text-8xl text-[#1A1A1A]">Selected<br />Works</h2>
             </div>
             <div className="hidden md:block">
-              <p className="font-body text-xs uppercase tracking-widest text-right mb-2">Residential & Commercial</p>
-              <p className="font-script text-2xl text-[#D4AF37] text-right">Portfolio 2024-2025</p>
+              <p className="font-body text-xs uppercase tracking-widest text-right mb-2 text-[#1A1A1A]/60">Residential & Commercial</p>
+              <p className="font-script text-3xl text-[#D4AF37] text-right">Portfolio 2024-2025</p>
             </div>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 md:gap-y-16">
             {galleryItems.map((item, index) => (
-              <div
+              <motion.div
                 key={item.id}
-                className={`group md:cursor-none ${index % 2 !== 0 ? 'md:mt-24' : ''}`}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                className="group md:cursor-none"
                 onMouseEnter={() => handleCursorHover("View Home")}
                 onMouseLeave={handleCursorLeave}
               >
@@ -617,34 +645,37 @@ const App = () => {
                     alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-110"
                   />
-                  <div className="absolute top-6 left-6 bg-[#FDFBF7] px-4 py-2 flex items-center gap-2">
-                    <MapPin size={12} />
-                    <span className="font-body text-[10px] uppercase tracking-wider">{item.location}</span>
-                  </div>
                 </div>
 
-                <div className="flex justify-between items-start border-t border-[#1A1A1A] pt-4 transition-all duration-300 group-hover:border-[#D4AF37]">
-                  <div>
-                    <h3 className="font-display text-2xl md:text-3xl group-hover:italic transition-all">{item.title}</h3>
-                    <p className="font-body text-[10px] uppercase tracking-widest mt-2 opacity-60">{item.specs}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-display text-lg md:text-xl">{item.price}</p>
-                    {/* Always visible on mobile, hover only on desktop */}
-                    <button className="opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity font-body text-[9px] uppercase tracking-[0.2em] mt-2 border-b border-black">
-                      View Project
-                    </button>
-                  </div>
+                <div className="border-t border-[#1A1A1A] pt-4 transition-all duration-300 group-hover:border-[#D4AF37]">
+                  <h3 className="font-display text-2xl md:text-4xl group-hover:italic transition-all">{item.title}</h3>
+                  <p className="font-body text-xs uppercase tracking-widest mt-2 opacity-60">{item.specs}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
+
+            {/* 6th Card: CTA to balance the 3x2 grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="group"
+            >
+              <a href="#contact" className="block">
+                <div className="relative overflow-hidden mb-6 aspect-[4/3] bg-[#1A1A1A] flex flex-col items-center justify-center text-[#FDFBF7] group-hover:bg-[#D4AF37] transition-colors duration-700">
+                  <span className="font-script text-4xl md:text-6xl text-[#D4AF37] group-hover:text-[#1A1A1A] transition-colors duration-700 mb-4">Your Space</span>
+                  <span className="font-display text-2xl md:text-4xl group-hover:text-[#1A1A1A] transition-colors duration-700">COULD BE NEXT</span>
+                  <span className="font-body text-[10px] uppercase tracking-[0.3em] mt-6 opacity-60 group-hover:opacity-100 group-hover:text-[#1A1A1A] transition-all duration-700">Start a Project →</span>
+                </div>
+                <div className="border-t border-[#1A1A1A] pt-4 transition-all duration-300 group-hover:border-[#D4AF37]">
+                  <h3 className="font-display text-2xl md:text-4xl group-hover:italic transition-all">Let's Collaborate</h3>
+                  <p className="font-body text-xs uppercase tracking-widest mt-2 opacity-60">Book a Consultation</p>
+                </div>
+              </a>
+            </motion.div>
           </div>
 
-          <div className="mt-16 md:mt-24 text-center">
-            <button className="px-12 py-4 border border-[#1A1A1A] rounded-full font-body text-[10px] md:text-xs uppercase tracking-[0.2em] hover:bg-[#1A1A1A] hover:text-[#FDFBF7] transition-all duration-300">
-              View All Projects
-            </button>
-          </div>
         </div>
       </section>
 
@@ -655,11 +686,16 @@ const App = () => {
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
 
           {/* Info Side */}
-          <div className="reveal-on-scroll">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="font-display text-5xl md:text-8xl leading-none mb-8 md:mb-12">
               Start a <br /> Project
             </h2>
-            <p className="font-body text-[13px] md:text-sm leading-loose text-[#1A1A1A]/70 mb-8 md:mb-12 max-w-md">
+            <p className="font-body text-sm md:text-base leading-relaxed text-[#1A1A1A]/80 mb-8 md:mb-12 max-w-md">
               Whether you are looking to refresh a single room or redesign your entire home, our team is ready to bring your vision to life.
             </p>
 
@@ -669,8 +705,8 @@ const App = () => {
                   <MapPin size={20} />
                 </div>
                 <div>
-                  <h4 className="font-display text-lg md:text-xl">Headquarters</h4>
-                  <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">1001 Fifth Avenue,<br />New York, NY 10028</p>
+                  <h4 className="font-display text-lg md:text-xl">Our Studio</h4>
+                  <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">Noha Interiors,<br />Karunagapally, Kerala, India</p>
                 </div>
               </div>
 
@@ -679,15 +715,21 @@ const App = () => {
                   <Phone size={20} />
                 </div>
                 <div>
-                  <h4 className="font-display text-lg md:text-xl">Private Line</h4>
-                  <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">+1 (212) 555-0198</p>
+                  <h4 className="font-display text-lg md:text-xl">Get in Touch</h4>
+                  <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">hello@nohainteriors.com</p>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Booking Form */}
-          <div className="bg-[#FDFBF7] p-6 md:p-12 shadow-2xl reveal-on-scroll relative overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="bg-[#FDFBF7] p-6 md:p-12 shadow-2xl relative overflow-hidden"
+          >
             {/* Decorative line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37] to-transparent"></div>
 
@@ -775,30 +817,39 @@ const App = () => {
                 </div>
               </div>
             )}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* --- FOOTER --- */}
       <footer className="bg-[#1A1A1A] text-[#FDFBF7] pt-16 md:pt-24 pb-8 border-t border-white/10">
         <div className="container mx-auto px-6 md:px-12 text-center">
-          <h2 className="font-display text-[15vw] md:text-[12vw] leading-none opacity-20 select-none">AESTHETICA</h2>
+          <h2 className="font-display text-[15vw] md:text-[12vw] leading-none opacity-20 select-none">NOHA</h2>
 
-          <div className="flex flex-col md:flex-row justify-between items-center mt-8 md:mt-12 pt-8 border-t border-white/10 font-body text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-white/40">
-            <p className="mb-4 md:mb-0">&copy; 2025 Aesthetica Interiors</p>
+          <div className="flex flex-col md:flex-row justify-between items-center mt-8 md:mt-12 pt-8 border-t border-white/10 font-body text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/40">
+            <p className="mb-4 md:mb-0">&copy; 2025 Noha Interiors</p>
             <div className="flex gap-6 md:gap-8">
-              <a href="#" className="hover:text-[#D4AF37] transition-colors">Privacy</a>
-              <a href="#" className="hover:text-[#D4AF37] transition-colors">Terms</a>
-              <a href="#" className="hover:text-[#D4AF37] transition-colors">Sitemap</a>
+              <a href="#" className="hover:text-[#D4AF37] transition-colors relative group">
+                Privacy
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
+              </a>
+              <a href="#" className="hover:text-[#D4AF37] transition-colors relative group">
+                Terms
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
+              </a>
+              <a href="#" className="hover:text-[#D4AF37] transition-colors relative group">
+                Sitemap
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
+              </a>
             </div>
           </div>
         </div>
       </footer>
 
       {/* --- SCROLL PROGRESS LINE --- */}
-      <div
-        className="fixed bottom-0 left-0 h-[4px] bg-[#D4AF37] z-50 transition-all duration-100 ease-out shadow-[0_0_10px_#D4AF37]"
-        style={{ width: `${scrollProgress * 100}%` }}
+      <motion.div
+        className="fixed bottom-0 left-0 h-[4px] bg-[#D4AF37] z-50 shadow-[0_0_10px_#D4AF37] origin-left"
+        style={{ scaleX: scrollProgress }}
       />
     </div>
   );
