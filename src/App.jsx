@@ -5,6 +5,7 @@ import {
   ArrowRight, Mail, Phone, Instagram, Linkedin, Facebook
 } from 'lucide-react';
 import NohaLogo from './assets/Noha_logo.jpeg';
+import HeroImage from './assets/image.png';
 import Work1 from './assets/work1.jpeg';
 import Work2 from './assets/work2.jpeg';
 import Work3 from './assets/work3.jpeg';
@@ -178,7 +179,7 @@ const App = () => {
   };
 
   return (
-    <div className="bg-[#FDFBF7] min-h-screen font-sans selection:bg-[#1A1A1A] selection:text-[#D4AF37] cursor-auto md:cursor-none overflow-x-hidden">
+    <div className="bg-[#0A0A0A] min-h-screen font-sans selection:bg-[#D4AF37] selection:text-[#0A0A0A] cursor-auto md:cursor-none overflow-x-hidden">
 
       {/* --- GLOBAL STYLES & FONTS --- */}
       <style>
@@ -191,7 +192,7 @@ const App = () => {
           
           html { scroll-behavior: smooth; }
           ::-webkit-scrollbar { width: 6px; }
-          ::-webkit-scrollbar-track { background: #0f0f0f; }
+          ::-webkit-scrollbar-track { background: #0A0A0A; }
           ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
 
           @keyframes fadeIn {
@@ -226,7 +227,7 @@ const App = () => {
       {/* --- NAVIGATION --- */}
       <nav className="fixed w-full z-50 px-6 py-6 md:px-12 md:py-8 flex justify-between items-center text-[#FDFBF7]">
         <div className="flex flex-col group cursor-pointer" onMouseEnter={() => handleCursorHover("Home")} onMouseLeave={handleCursorLeave}>
-          <img src={NohaLogo} alt="Noha Interiors" className="h-12 md:h-16 w-auto object-contain mix-blend-multiply" />
+          <img src={HeroImage} alt="Noha Interiors" className="h-10 md:h-14 w-auto object-contain" />
         </div>
 
         <div className="flex items-center gap-8 mix-blend-difference">
@@ -252,7 +253,7 @@ const App = () => {
       </nav>
 
       {/* --- FULL SCREEN MENU --- */}
-      <div className={`fixed inset-0 bg-[#0f0f0f] z-[60] transition-transform duration-[0.8s] ease-[0.16,1,0.3,1] ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
+      <div className={`fixed inset-0 bg-[#0A0A0A] z-[60] transition-transform duration-[0.8s] ease-[0.16,1,0.3,1] ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="h-full flex flex-col items-center justify-center relative text-[#FDFBF7] px-6">
           <button
             onClick={() => setIsMenuOpen(false)}
@@ -282,7 +283,7 @@ const App = () => {
       {/* =========================================
           PAGE 1: HERO SECTION
       ========================================= */}
-      <header id="residence" className="relative h-[100dvh] flex flex-col justify-center items-center px-6 overflow-hidden">
+      <header id="residence" className="relative h-[100dvh] flex items-center px-6 md:px-16 lg:px-24 overflow-hidden">
 
         {/* Parallax Background */}
         <motion.div
@@ -296,80 +297,93 @@ const App = () => {
             decoding="async"
             className="w-full h-[120%] object-cover"
           />
-          <div className="absolute inset-0 bg-black/30"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/50 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/30 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/70 via-transparent to-transparent"></div>
         </motion.div>
 
-        <div className="z-10 text-center relative mt-20 w-full max-w-[90vw]">
+        <div className="z-10 relative w-full max-w-[1400px] mx-auto pt-24 md:pt-0">
+
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center justify-center gap-4 mb-8 md:mb-12"
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center gap-3 mb-6"
           >
-            <span className="h-[1px] w-8 md:w-12 bg-[#FDFBF7]"></span>
-            <p className="font-body text-xs md:text-sm tracking-[0.4em] uppercase text-[#FDFBF7] drop-shadow-lg">
-              Est. 2024
+            <span className="h-[1px] w-8 bg-[#D4AF37]"></span>
+            <p className="font-body text-[10px] md:text-xs tracking-[0.4em] uppercase text-[#D4AF37]">
+              Interior Design Studio
             </p>
-            <span className="h-[1px] w-8 md:w-12 bg-[#FDFBF7]"></span>
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 60 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[15vw] md:text-[10rem] leading-[0.8] text-[#FDFBF7] mix-blend-overlay"
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="font-display text-[18vw] md:text-[10rem] lg:text-[12rem] leading-[0.85] text-[#FDFBF7] mb-2"
           >
-            DEFINING
+            NOHA
           </motion.h1>
 
-          <div className="relative">
-            <motion.h2
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="font-script text-[12vw] md:text-9xl text-[#D4AF37] -mt-2 md:-mt-12 relative z-20"
-            >
-              True Elegance
-            </motion.h2>
-          </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="font-script text-[12vw] md:text-8xl lg:text-9xl text-[#D4AF37] -mt-2 md:-mt-8 mb-6 md:mb-8"
+          >
+            Interiors
+          </motion.h2>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
-            className="font-body text-[11px] md:text-sm text-[#FDFBF7]/80 max-w-[80vw] md:max-w-md mx-auto mt-6 md:mt-8 tracking-widest leading-relaxed"
+            transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+            className="max-w-lg"
           >
-            Curating spaces that transcend the ordinary. Where vision meets reality in a symphony of luxury.
-          </motion.p>
+            <p className="font-body text-sm md:text-base text-[#FDFBF7]/70 leading-relaxed tracking-wide mb-8">
+              Where every corner tells a story of elegance. We craft interiors that are not just seen, but felt — spaces that breathe luxury into the rhythm of your everyday life.
+            </p>
 
+            <div className="flex items-center gap-6">
+              <a
+                href="#contact"
+                className="bg-[#D4AF37] text-[#0A0A0A] px-8 py-3.5 font-body text-[10px] md:text-xs uppercase tracking-[0.2em] font-semibold hover:bg-[#b89528] transition-colors"
+              >
+                Start a Project
+              </a>
+              <a
+                href="#portfolio"
+                className="font-body text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#FDFBF7]/60 hover:text-[#D4AF37] transition-colors border-b border-[#FDFBF7]/20 hover:border-[#D4AF37] pb-1"
+              >
+                View Portfolio
+              </a>
+            </div>
+          </motion.div>
 
         </div>
 
-        <div className="absolute bottom-8 right-6 md:bottom-12 md:right-12 hidden md:flex flex-col items-end text-[#FDFBF7]/60 z-10">
-          <span className="font-display text-4xl">01</span>
-          <span className="text-[9px] uppercase tracking-widest mt-1">Introduction</span>
-        </div>
+        {/* Bottom fade into next section */}
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0A0A0A] to-transparent z-[5]"></div>
       </header>
 
       {/* =========================================
           PAGE 2: ABOUT US (PHILOSOPHY)
       ========================================= */}
-      <section id="philosophy" className="py-20 md:py-24 px-6 md:px-24 bg-[#FDFBF7] relative z-10 overflow-hidden border-b border-[#1A1A1A]/5">
+      <section id="philosophy" className="py-8 md:py-10 px-6 md:px-24 bg-[#0A0A0A] relative z-10 overflow-hidden border-b border-white/5">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center">
 
             {/* Left Text */}
             <div className="lg:col-span-5 pr-0 lg:pr-12">
-              <span className="block text-[#D4AF37] font-body text-xs uppercase tracking-[0.3em] mb-4 md:mb-6">
+              <span className="block text-[#D4AF37] font-body text-xs uppercase tracking-[0.3em] mb-2">
                 Our Philosophy
               </span>
-              <h2 className="font-display text-4xl md:text-7xl text-[#1A1A1A] leading-[1.1] mb-6 md:mb-8">
+              <h2 className="font-display text-4xl md:text-7xl text-[#FDFBF7] leading-[1.1] mb-3 md:mb-4">
                 We don't just design spaces. <br />
                 <span className="italic opacity-60 font-script text-5xl md:text-8xl block mt-2">We curate lifestyles.</span>
               </h2>
-              <div className="space-y-6 md:space-y-8 text-[#1A1A1A]/80 font-body text-sm md:text-base leading-relaxed text-justify relative">
-                <div className="absolute top-0 left-0 w-[1px] h-full bg-[#1A1A1A]/10 -ml-6 hidden md:block"></div>
+              <div className="space-y-3 text-[#FDFBF7]/70 font-body text-sm md:text-base leading-relaxed text-justify relative">
+                <div className="absolute top-0 left-0 w-[1px] h-full bg-white/10 -ml-6 hidden md:block"></div>
                 <p>
                   At Noha Interiors, we believe that a home is more than a structure; it is the physical manifestation of your inner world. Founded on the principles of sensory depth and aesthetic mastery, we bridge the gap between architectural form and human emotion.
                 </p>
@@ -378,40 +392,40 @@ const App = () => {
                 </p>
               </div>
 
-              <div className="mt-8 md:mt-12 flex items-center gap-4">
-                <div className="bg-[#1A1A1A] text-[#FDFBF7] w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center">
+              <div className="mt-4 md:mt-6 flex items-center gap-4">
+                <div className="bg-[#D4AF37] text-[#0A0A0A] w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center">
                   <Building size={20} />
                 </div>
                 <div>
-                  <p className="font-display text-base md:text-lg text-[#1A1A1A]">Noha Interiors</p>
-                  <p className="font-body text-[8px] md:text-[9px] uppercase tracking-widest text-[#1A1A1A]/50">Karunagapally, Kerala</p>
+                  <p className="font-display text-base md:text-lg text-[#FDFBF7]">Noha Interiors</p>
+                  <p className="font-body text-[8px] md:text-[9px] uppercase tracking-widest text-[#FDFBF7]/50">Karunagapally, Kerala</p>
                 </div>
               </div>
             </div>
 
             {/* Right Image Grid */}
             <div className="lg:col-span-7 relative">
-              <div className="grid grid-cols-2 gap-3 md:gap-4">
-                <div className="space-y-3 md:space-y-4 mt-8 md:mt-12">
+              <div className="grid grid-cols-2 gap-3 md:gap-3">
+                <div className="space-y-2 mt-4 md:mt-6">
                   <img
                     src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800"
-                    className="w-full aspect-[3/4] object-cover hover:grayscale transition-all duration-700 rounded-sm"
+                    className="w-full aspect-[3/4] object-cover hover:brightness-75 transition-all duration-700 rounded-sm"
                     alt="Interior Detail"
                     onMouseEnter={() => handleCursorHover("Detail")} onMouseLeave={handleCursorLeave}
                   />
-                  <div className="bg-[#1A1A1A] p-4 md:p-6 text-[#FDFBF7] text-center rounded-sm">
+                  <div className="bg-[#1A1A1A] p-3 md:p-4 text-[#FDFBF7] text-center rounded-sm border border-white/5">
                     <h4 className="font-display text-xl md:text-2xl">100+</h4>
                     <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60">Projects Completed</p>
                   </div>
                 </div>
-                <div className="space-y-3 md:space-y-4">
-                  <div className="bg-[#D4AF37] p-4 md:p-6 text-[#1A1A1A] text-center rounded-sm">
+                <div className="space-y-2">
+                  <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/30 p-3 md:p-4 text-[#D4AF37] text-center rounded-sm">
                     <h4 className="font-display text-xl md:text-2xl">15 Years</h4>
                     <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60">Of Excellence</p>
                   </div>
                   <img
                     src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800"
-                    className="w-full aspect-[3/4] object-cover hover:grayscale transition-all duration-700 rounded-sm"
+                    className="w-full aspect-[3/4] object-cover hover:brightness-75 transition-all duration-700 rounded-sm"
                     alt="Exterior"
                     onMouseEnter={() => handleCursorHover("Estate")} onMouseLeave={handleCursorLeave}
                   />
@@ -425,7 +439,7 @@ const App = () => {
       {/* =========================================
           PAGE 3: SERVICES (ACCORDION ON MOBILE, SPLIT ON DESKTOP)
       ========================================= */}
-      <section id="services" className="py-20 md:py-24 bg-[#111111] text-[#FDFBF7] relative overflow-hidden">
+      <section id="services" className="py-8 md:py-10 bg-[#111111] text-[#FDFBF7] relative overflow-hidden border-t border-white/5">
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}>
         </div>
@@ -436,20 +450,20 @@ const App = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16 md:mb-20"
+            className="text-center mb-6 md:mb-8"
           >
             <span className="text-[#D4AF37] font-body text-xs uppercase tracking-[0.3em]">
               Holistic Approach
             </span>
-            <h2 className="font-display text-4xl md:text-6xl mt-4">
+            <h2 className="font-display text-4xl md:text-6xl mt-2">
               Our Services
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
 
             {/* Service Selection List (Left Column) + Mobile Content */}
-            <div className="lg:col-span-5 space-y-4">
+            <div className="lg:col-span-5 space-y-2">
               {services.map((service, index) => (
                 <motion.div
                   key={index}
@@ -462,7 +476,7 @@ const App = () => {
                   {/* Header Button */}
                   <div
                     onClick={() => setActiveService(activeService === index ? null : index)}
-                    className={`p-6 md:p-8 border border-white/10 cursor-pointer transition-all duration-500 hover:bg-white/5 relative overflow-hidden
+                    className={`p-3 md:p-4 border border-white/10 cursor-pointer transition-all duration-500 hover:bg-white/5 relative overflow-hidden
                       ${activeService === index ? 'bg-white/5 border-[#D4AF37]/50' : ''}`}
                   >
                     <div className="flex justify-between items-center">
@@ -480,15 +494,15 @@ const App = () => {
                   </div>
 
                   {/* MOBILE/TABLET ACCORDION CONTENT (Hidden on Desktop) */}
-                  <div className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${activeService === index ? 'max-h-[600px] opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
-                    <div className="bg-[#1A1A1A] p-8 border border-white/5">
-                      <div className="mb-6 text-[#D4AF37]">
+                  <div className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${activeService === index ? 'max-h-[600px] opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
+                    <div className="bg-[#1A1A1A] p-4 border border-white/5">
+                      <div className="mb-4 text-[#D4AF37]">
                         {service.icon}
                       </div>
-                      <p className="font-body text-sm text-gray-400 leading-loose mb-6">
+                      <p className="font-body text-sm text-gray-400 leading-loose mb-4">
                         {service.desc}
                       </p>
-                      <div className="space-y-4 mb-8">
+                      <div className="space-y-2 mb-4">
                         {service.features.map((feature, fIndex) => (
                           <div key={fIndex} className="flex items-center gap-4 border-b border-white/10 pb-3">
                             <Check size={14} className="text-[#D4AF37]" />
@@ -512,31 +526,31 @@ const App = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="relative h-full min-h-[500px] bg-[#1A1A1A] p-8 md:p-16 border border-white/5 flex flex-col justify-center lg:sticky lg:top-32 transition-all duration-700"
+                className="relative h-full min-h-[350px] bg-[#1A1A1A] p-6 md:p-10 border border-white/5 flex flex-col justify-center lg:sticky lg:top-32 transition-all duration-700"
               >
-                <div className="absolute top-0 right-0 p-8 md:p-12 text-[#D4AF37] opacity-20">
+                <div className="absolute top-0 right-0 p-6 md:p-8 text-[#D4AF37] opacity-20">
                   {services[activeService !== null ? activeService : 0].icon}
                 </div>
 
                 <div key={`content-${activeService}`}>
-                  <h3 className="font-script text-6xl md:text-8xl text-[#D4AF37] mb-8 animate-[fadeIn_0.5s_ease-out_forwards]">
+                  <h3 className="font-script text-5xl md:text-7xl text-[#D4AF37] mb-4 animate-[fadeIn_0.5s_ease-out_forwards]">
                     {services[activeService !== null ? activeService : 0].title}
                   </h3>
 
-                  <p className="font-body text-base md:text-lg text-gray-300 leading-relaxed mb-12 max-w-xl animate-[fadeIn_0.5s_ease-out_0.1s_forwards]">
+                  <p className="font-body text-base md:text-lg text-gray-300 leading-relaxed mb-6 max-w-xl animate-[fadeIn_0.5s_ease-out_0.1s_forwards]">
                     {services[activeService !== null ? activeService : 0].desc}
                   </p>
 
-                  <div className="space-y-6">
+                  <div className="space-y-3">
                     {services[activeService !== null ? activeService : 0].features.map((feature, i) => (
-                      <div key={`feat-${i}`} className="flex items-center gap-6 border-b border-white/10 pb-6 animate-[fadeIn_0.5s_ease-out_forwards]" style={{ animationDelay: `${0.15 * i}s` }}>
+                      <div key={`feat-${i}`} className="flex items-center gap-3 border-b border-white/10 pb-3 animate-[fadeIn_0.5s_ease-out_forwards]" style={{ animationDelay: `${0.15 * i}s` }}>
                         <Check size={18} className="text-[#D4AF37]" />
                         <span className="font-body text-xs md:text-sm uppercase tracking-widest text-white/80">{feature}</span>
                       </div>
                     ))}
                   </div>
 
-                  <button className="mt-16 self-start font-body text-xs uppercase tracking-[0.2em] border-b border-[#D4AF37] pb-2 hover:text-[#D4AF37] transition-colors flex items-center gap-2">
+                  <button className="mt-6 self-start font-body text-xs uppercase tracking-[0.2em] border-b border-[#D4AF37] pb-2 hover:text-[#D4AF37] transition-colors flex items-center gap-2">
                     Inquire About {services[activeService !== null ? activeService : 0].title} <ArrowRight size={14} />
                   </button>
                 </div>
@@ -547,19 +561,19 @@ const App = () => {
         </div>
       </section>
 
-      <section id="process" className="py-20 md:py-24 px-6 md:px-24 bg-[#EBE9E4]">
+      <section id="process" className="py-8 md:py-10 px-6 md:px-24 bg-[#141414] border-t border-white/5">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.8 }}
             >
-              <span className="block text-[#D4AF37] font-body text-xs uppercase tracking-[0.3em] mb-4">
+              <span className="block text-[#D4AF37] font-body text-xs uppercase tracking-[0.3em] mb-2">
                 The Methodology
               </span>
-              <h2 className="font-display text-4xl md:text-6xl text-[#1A1A1A] leading-[1.1] mb-8">
+              <h2 className="font-display text-4xl md:text-6xl text-[#FDFBF7] leading-[1.1] mb-4">
                 Orchestrating <br /> <span className="italic opacity-60 font-script text-6xl md:text-7xl block mt-2">The Senses.</span>
               </h2>
             </motion.div>
@@ -568,9 +582,9 @@ const App = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6 font-body text-sm md:text-base leading-relaxed text-[#1A1A1A]/80 text-justify relative"
+              className="space-y-4 font-body text-sm md:text-base leading-relaxed text-[#FDFBF7]/70 text-justify relative"
             >
-              <div className="absolute top-0 -left-8 w-[1px] h-full bg-[#1A1A1A]/10 hidden lg:block"></div>
+              <div className="absolute top-0 -left-8 w-[1px] h-full bg-white/10 hidden lg:block"></div>
               <p>
                 True luxury is not just about what you see, but how you feel. Our design process is a meticulous orchestration of light, texture, and volume. We begin not with a floorplan, but with a conversation—uncovering the rituals and rhythms of your daily life.
               </p>
@@ -583,7 +597,7 @@ const App = () => {
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 md:mt-24">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 md:mt-8">
             {[
               { title: "Concept", text: "We define the narrative direction, selecting a palette of materials and emotions that will guide the project." },
               { title: "Development", text: "Technical precision meets artistic vision. We produce detailed architectural drawings and 3D renderings." },
@@ -595,11 +609,11 @@ const App = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.2 }}
-                className="border-t border-[#1A1A1A]/10 pt-6 pr-4"
+                className="border-t border-white/10 pt-4 pr-4"
               >
-                <span className="font-display text-3xl text-[#D4AF37]/50 mb-4 block">0{i + 1}</span>
-                <h4 className="font-display text-2xl mb-3">{step.title}</h4>
-                <p className="font-body text-sm leading-relaxed opacity-70 text-justify">{step.text}</p>
+                <span className="font-display text-2xl text-[#D4AF37]/50 mb-2 block">0{i + 1}</span>
+                <h4 className="font-display text-xl mb-2 text-[#FDFBF7]">{step.title}</h4>
+                <p className="font-body text-sm leading-relaxed text-[#FDFBF7]/60 text-justify">{step.text}</p>
               </motion.div>
             ))}
           </div>
@@ -609,25 +623,25 @@ const App = () => {
       {/* =========================================
           PAGE 4: GALLERY (THE PORTFOLIO)
       ========================================= */}
-      <section id="portfolio" className="py-20 md:py-32 px-6 bg-[#FDFBF7]">
+      <section id="portfolio" className="py-8 md:py-10 px-6 bg-[#0A0A0A] border-t border-white/5">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8 }}
-            className="flex justify-between items-end mb-12 md:mb-16 border-b border-[#1A1A1A]/10 pb-6"
+            className="flex justify-between items-end mb-6 md:mb-8 border-b border-white/10 pb-3"
           >
             <div>
-              <h2 className="font-display text-5xl md:text-8xl text-[#1A1A1A]">Selected<br />Works</h2>
+              <h2 className="font-display text-5xl md:text-8xl text-[#FDFBF7]">Selected<br />Works</h2>
             </div>
             <div className="hidden md:block">
-              <p className="font-body text-xs uppercase tracking-widest text-right mb-2 text-[#1A1A1A]/60">Residential & Commercial</p>
+              <p className="font-body text-xs uppercase tracking-widest text-right mb-2 text-[#FDFBF7]/60">Residential & Commercial</p>
               <p className="font-script text-3xl text-[#D4AF37] text-right">Portfolio 2024-2025</p>
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 md:gap-y-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-6 md:gap-y-8">
             {galleryItems.map((item, index) => (
               <motion.div
                 key={item.id}
@@ -639,7 +653,7 @@ const App = () => {
                 onMouseEnter={() => handleCursorHover("View Home")}
                 onMouseLeave={handleCursorLeave}
               >
-                <div className="relative overflow-hidden mb-6 aspect-[4/3]">
+                <div className="relative overflow-hidden mb-3 aspect-[4/3]">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -647,9 +661,9 @@ const App = () => {
                   />
                 </div>
 
-                <div className="border-t border-[#1A1A1A] pt-4 transition-all duration-300 group-hover:border-[#D4AF37]">
-                  <h3 className="font-display text-2xl md:text-4xl group-hover:italic transition-all">{item.title}</h3>
-                  <p className="font-body text-xs uppercase tracking-widest mt-2 opacity-60">{item.specs}</p>
+                <div className="border-t border-white/20 pt-3 transition-all duration-300 group-hover:border-[#D4AF37]">
+                  <h3 className="font-display text-xl md:text-3xl text-[#FDFBF7] group-hover:italic transition-all">{item.title}</h3>
+                  <p className="font-body text-xs uppercase tracking-widest mt-1 text-[#FDFBF7]/50">{item.specs}</p>
                 </div>
               </motion.div>
             ))}
@@ -663,14 +677,14 @@ const App = () => {
               className="group"
             >
               <a href="#contact" className="block">
-                <div className="relative overflow-hidden mb-6 aspect-[4/3] bg-[#1A1A1A] flex flex-col items-center justify-center text-[#FDFBF7] group-hover:bg-[#D4AF37] transition-colors duration-700">
-                  <span className="font-script text-4xl md:text-6xl text-[#D4AF37] group-hover:text-[#1A1A1A] transition-colors duration-700 mb-4">Your Space</span>
-                  <span className="font-display text-2xl md:text-4xl group-hover:text-[#1A1A1A] transition-colors duration-700">COULD BE NEXT</span>
-                  <span className="font-body text-[10px] uppercase tracking-[0.3em] mt-6 opacity-60 group-hover:opacity-100 group-hover:text-[#1A1A1A] transition-all duration-700">Start a Project →</span>
+                <div className="relative overflow-hidden mb-3 aspect-[4/3] bg-[#1A1A1A] border border-white/10 flex flex-col items-center justify-center text-[#FDFBF7] group-hover:bg-[#D4AF37] transition-colors duration-700">
+                  <span className="font-script text-3xl md:text-5xl text-[#D4AF37] group-hover:text-[#0A0A0A] transition-colors duration-700 mb-3">Your Space</span>
+                  <span className="font-display text-xl md:text-3xl group-hover:text-[#0A0A0A] transition-colors duration-700">COULD BE NEXT</span>
+                  <span className="font-body text-[10px] uppercase tracking-[0.3em] mt-4 opacity-60 group-hover:opacity-100 group-hover:text-[#0A0A0A] transition-all duration-700">Start a Project →</span>
                 </div>
-                <div className="border-t border-[#1A1A1A] pt-4 transition-all duration-300 group-hover:border-[#D4AF37]">
-                  <h3 className="font-display text-2xl md:text-4xl group-hover:italic transition-all">Let's Collaborate</h3>
-                  <p className="font-body text-xs uppercase tracking-widest mt-2 opacity-60">Book a Consultation</p>
+                <div className="border-t border-white/20 pt-3 transition-all duration-300 group-hover:border-[#D4AF37]">
+                  <h3 className="font-display text-xl md:text-3xl text-[#FDFBF7] group-hover:italic transition-all">Let's Collaborate</h3>
+                  <p className="font-body text-xs uppercase tracking-widest mt-1 text-[#FDFBF7]/50">Book a Consultation</p>
                 </div>
               </a>
             </motion.div>
@@ -682,8 +696,8 @@ const App = () => {
       {/* =========================================
           PAGE 5: CONTACT & BOOKING
       ========================================= */}
-      <section id="contact" className="py-20 md:py-32 px-6 md:px-12 bg-[#EBE9E4] relative">
-        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
+      <section id="contact" className="py-8 md:py-10 px-6 md:px-12 bg-[#141414] relative border-t border-white/5">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
 
           {/* Info Side */}
           <motion.div
@@ -692,31 +706,31 @@ const App = () => {
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="font-display text-5xl md:text-8xl leading-none mb-8 md:mb-12">
+            <h2 className="font-display text-5xl md:text-7xl leading-none mb-4 md:mb-6 text-[#FDFBF7]">
               Start a <br /> Project
             </h2>
-            <p className="font-body text-sm md:text-base leading-relaxed text-[#1A1A1A]/80 mb-8 md:mb-12 max-w-md">
+            <p className="font-body text-sm md:text-base leading-relaxed text-[#FDFBF7]/70 mb-4 md:mb-6 max-w-md">
               Whether you are looking to refresh a single room or redesign your entire home, our team is ready to bring your vision to life.
             </p>
 
-            <div className="space-y-6 md:space-y-8">
+            <div className="space-y-3 md:space-y-4">
               <div className="flex gap-4 items-start">
-                <div className="bg-[#1A1A1A] text-[#FDFBF7] p-3 rounded-full">
+                <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] p-3 rounded-full">
                   <MapPin size={20} />
                 </div>
                 <div>
-                  <h4 className="font-display text-lg md:text-xl">Our Studio</h4>
-                  <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">Noha Interiors,<br />Karunagapally, Kerala, India</p>
+                  <h4 className="font-display text-lg md:text-xl text-[#FDFBF7]">Our Studio</h4>
+                  <p className="font-body text-xs text-[#FDFBF7]/50 mt-1">Noha Interiors,<br />Karunagapally, Kerala, India</p>
                 </div>
               </div>
 
               <div className="flex gap-4 items-start">
-                <div className="bg-[#1A1A1A] text-[#FDFBF7] p-3 rounded-full">
+                <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] p-3 rounded-full">
                   <Phone size={20} />
                 </div>
                 <div>
-                  <h4 className="font-display text-lg md:text-xl">Get in Touch</h4>
-                  <p className="font-body text-xs text-[#1A1A1A]/60 mt-1">hello@nohainteriors.com</p>
+                  <h4 className="font-display text-lg md:text-xl text-[#FDFBF7]">Get in Touch</h4>
+                  <p className="font-body text-xs text-[#FDFBF7]/50 mt-1">hello@nohainteriors.com</p>
                 </div>
               </div>
             </div>
@@ -728,45 +742,45 @@ const App = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-[#FDFBF7] p-6 md:p-12 shadow-2xl relative overflow-hidden"
+            className="bg-[#1A1A1A] p-5 md:p-8 shadow-2xl relative overflow-hidden border border-white/10"
           >
             {/* Decorative line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37] to-transparent"></div>
 
-            <div className="mb-8 flex justify-between items-end">
-              <h3 className="font-display text-2xl md:text-3xl">Consultation</h3>
+            <div className="mb-4 flex justify-between items-end">
+              <h3 className="font-display text-2xl md:text-3xl text-[#FDFBF7]">Consultation</h3>
               <span className="font-body text-[9px] md:text-[10px] uppercase tracking-widest text-[#D4AF37]">
                 Step {bookingStep} of 2
               </span>
             </div>
 
             {bookingStep === 1 ? (
-              <div className="space-y-6 animate-[fadeIn_0.5s_ease-out]">
-                <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-4 animate-[fadeIn_0.5s_ease-out]">
+                <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-[9px] uppercase tracking-widest font-bold">First Name</label>
-                    <input type="text" className="w-full bg-[#EBE9E4]/30 border-b border-[#1A1A1A]/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm" placeholder="John" />
+                    <label className="text-[9px] uppercase tracking-widest font-bold text-[#FDFBF7]/80">First Name</label>
+                    <input type="text" className="w-full bg-white/5 border-b border-white/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm text-[#FDFBF7] placeholder-white/30" placeholder="John" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[9px] uppercase tracking-widest font-bold">Last Name</label>
-                    <input type="text" className="w-full bg-[#EBE9E4]/30 border-b border-[#1A1A1A]/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm" placeholder="Doe" />
+                    <label className="text-[9px] uppercase tracking-widest font-bold text-[#FDFBF7]/80">Last Name</label>
+                    <input type="text" className="w-full bg-white/5 border-b border-white/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm text-[#FDFBF7] placeholder-white/30" placeholder="Doe" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[9px] uppercase tracking-widest font-bold">Email Address</label>
-                  <input type="email" className="w-full bg-[#EBE9E4]/30 border-b border-[#1A1A1A]/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm" placeholder="john@example.com" />
+                  <label className="text-[9px] uppercase tracking-widest font-bold text-[#FDFBF7]/80">Email Address</label>
+                  <input type="email" className="w-full bg-white/5 border-b border-white/20 p-2 focus:outline-none focus:border-[#D4AF37] transition-colors font-body text-sm text-[#FDFBF7] placeholder-white/30" placeholder="john@example.com" />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[9px] uppercase tracking-widest font-bold">I am Interested In</label>
+                  <label className="text-[9px] uppercase tracking-widest font-bold text-[#FDFBF7]/80">I am Interested In</label>
                   <div className="flex gap-2 md:gap-4 mt-2">
                     {['Residential', 'Commercial', 'Consultation'].map(opt => (
                       <button
                         key={opt}
                         onClick={() => setFormData({ ...formData, interest: opt })}
                         className={`flex-1 py-3 text-[10px] md:text-xs uppercase tracking-wider border transition-all
-                            ${formData.interest === opt ? 'bg-[#1A1A1A] text-[#FDFBF7] border-[#1A1A1A]' : 'border-[#1A1A1A]/20 hover:border-[#1A1A1A]'}`}
+                            ${formData.interest === opt ? 'bg-[#D4AF37] text-[#0A0A0A] border-[#D4AF37]' : 'border-white/20 text-[#FDFBF7]/70 hover:border-[#D4AF37]'}`}
                       >
                         {opt}
                       </button>
@@ -776,14 +790,14 @@ const App = () => {
 
                 <button
                   onClick={() => setBookingStep(2)}
-                  className="w-full bg-[#D4AF37] text-white py-4 mt-4 font-body text-xs uppercase tracking-[0.2em] hover:bg-[#b89528] transition-colors flex justify-center items-center gap-2"
+                  className="w-full bg-[#D4AF37] text-[#0A0A0A] py-4 mt-4 font-body text-xs uppercase tracking-[0.2em] hover:bg-[#b89528] transition-colors flex justify-center items-center gap-2 font-semibold"
                 >
                   Select Time Slot <ArrowRight size={14} />
                 </button>
               </div>
             ) : (
               <div className="animate-[fadeIn_0.5s_ease-out]">
-                <p className="font-body text-xs text-gray-500 mb-6">Please select a preferred time for a 30-minute discovery call.</p>
+                <p className="font-body text-xs text-[#FDFBF7]/50 mb-6">Please select a preferred time for a 30-minute discovery call.</p>
 
                 <div className="grid grid-cols-2 gap-3 mb-8">
                   {timeSlots.map(slot => (
@@ -792,8 +806,8 @@ const App = () => {
                       onClick={() => setSelectedSlot(slot)}
                       className={`py-3 px-2 md:px-4 border text-[10px] md:text-xs font-body transition-all flex justify-between items-center
                          ${selectedSlot === slot
-                          ? 'bg-[#1A1A1A] text-[#FDFBF7] border-[#1A1A1A]'
-                          : 'border-[#1A1A1A]/10 hover:border-[#1A1A1A] text-[#1A1A1A]'}`}
+                          ? 'bg-[#D4AF37] text-[#0A0A0A] border-[#D4AF37]'
+                          : 'border-white/20 hover:border-[#D4AF37] text-[#FDFBF7]/70'}`}
                     >
                       {slot}
                       {selectedSlot === slot && <Check size={12} />}
@@ -804,12 +818,12 @@ const App = () => {
                 <div className="flex gap-4">
                   <button
                     onClick={() => setBookingStep(1)}
-                    className="flex-1 py-4 border border-[#1A1A1A]/20 font-body text-xs uppercase tracking-[0.2em] hover:bg-[#EBE9E4] transition-colors"
+                    className="flex-1 py-4 border border-white/20 font-body text-xs uppercase tracking-[0.2em] text-[#FDFBF7]/70 hover:bg-white/5 transition-colors"
                   >
                     Back
                   </button>
                   <button
-                    className="flex-[2] bg-[#1A1A1A] text-white py-4 font-body text-xs uppercase tracking-[0.2em] hover:bg-black transition-colors"
+                    className="flex-[2] bg-[#D4AF37] text-[#0A0A0A] py-4 font-body text-xs uppercase tracking-[0.2em] hover:bg-[#b89528] transition-colors font-semibold"
                     onClick={() => alert("Request sent! We will contact you shortly.")}
                   >
                     Confirm Request
@@ -822,11 +836,11 @@ const App = () => {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="bg-[#1A1A1A] text-[#FDFBF7] pt-16 md:pt-24 pb-8 border-t border-white/10">
+      <footer className="bg-[#0A0A0A] text-[#FDFBF7] pt-6 md:pt-8 pb-4 border-t border-white/5">
         <div className="container mx-auto px-6 md:px-12 text-center">
           <h2 className="font-display text-[15vw] md:text-[12vw] leading-none opacity-20 select-none">NOHA</h2>
 
-          <div className="flex flex-col md:flex-row justify-between items-center mt-8 md:mt-12 pt-8 border-t border-white/10 font-body text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/40">
+          <div className="flex flex-col md:flex-row justify-between items-center mt-4 md:mt-6 pt-4 border-t border-white/10 font-body text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/40">
             <p className="mb-4 md:mb-0">&copy; 2025 Noha Interiors</p>
             <div className="flex gap-6 md:gap-8">
               <a href="#" className="hover:text-[#D4AF37] transition-colors relative group">
