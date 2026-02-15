@@ -27,6 +27,7 @@ const App = () => {
   const [activeCursor, setActiveCursor] = useState(false);
   const [cursorText, setCursorText] = useState("View");
   const [activeService, setActiveService] = useState(0);
+  const [activeProcess, setActiveProcess] = useState(null);
   // Form State
   const [bookingStep, setBookingStep] = useState(1);
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -205,15 +206,15 @@ const App = () => {
       {/* --- CUSTOM CURSOR (Hidden on Touch Devices) --- */}
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 pointer-events-none z-[100] hidden md:block will-change-transform mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[100] hidden md:block will-change-transform"
       >
         <div
           className={`
-            relative -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border border-[#FDFBF7] transition-all duration-300 ease-out
-            ${activeCursor ? 'w-32 h-32 bg-[#FDFBF7] text-[#1A1A1A] scale-100' : 'w-4 h-4 bg-[#D4AF37] scale-100'}
+            relative -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full transition-all duration-300 ease-out
+            ${activeCursor ? 'w-20 h-20 bg-white/90 text-[#0A0A0A] scale-100' : 'w-3 h-3 bg-white scale-100'}
           `}
         >
-          <span className={`text-xs font-bold uppercase tracking-widest transition-opacity duration-200 ${activeCursor ? 'opacity-100' : 'opacity-0'}`}>
+          <span className={`text-[9px] font-bold uppercase tracking-widest transition-opacity duration-200 ${activeCursor ? 'opacity-100' : 'opacity-0'}`}>
             {cursorText}
           </span>
         </div>
@@ -230,16 +231,7 @@ const App = () => {
           <img src={HeroImage} alt="Noha Interiors" className="h-10 md:h-14 w-auto object-contain" />
         </div>
 
-        <div className="flex items-center gap-8 mix-blend-difference">
-          <button className="hidden md:block font-body text-xs uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors relative group">
-            Portfolio
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
-          </button>
-          <button className="hidden md:block font-body text-xs uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors relative group">
-            Journal
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
-          </button>
-
+        <div className="flex items-center">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="group flex flex-col items-end gap-1.5 p-2"
@@ -586,18 +578,12 @@ const App = () => {
             >
               <div className="absolute top-0 -left-8 w-[1px] h-full bg-white/10 hidden lg:block"></div>
               <p>
-                True luxury is not just about what you see, but how you feel. Our design process is a meticulous orchestration of light, texture, and volume. We begin not with a floorplan, but with a conversation—uncovering the rituals and rhythms of your daily life.
-              </p>
-              <p>
-                We layer materials with intention. Rough limestone meets smooth silk; cold steel embraces warm walnut. This juxtaposition creates a tactile dialogue that engages the hand as much as the eye. Every joint, every seam, every shadow is considered.
-              </p>
-              <p>
-                From the initial concept sketches to the final placement of an antique vase, we manage the entire ecosystem of the project. We collaborate with the world's finest artisans—masons from Carrara, weavers from Kyoto, and cabinet makers from Copenhagen—to ensure that every element is bespoke and irreplaceable.
+                True luxury is not just about what you see, but how you feel. Our design process is a meticulous orchestration of light, texture, and volume — layering materials with intention to create spaces that engage every sense.
               </p>
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 md:mt-8">
+          <div className="mt-6 md:mt-8 space-y-2">
             {[
               { title: "Concept", text: "We define the narrative direction, selecting a palette of materials and emotions that will guide the project." },
               { title: "Development", text: "Technical precision meets artistic vision. We produce detailed architectural drawings and 3D renderings." },
@@ -605,15 +591,25 @@ const App = () => {
             ].map((step, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.2 }}
-                className="border-t border-white/10 pt-4 pr-4"
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="border border-white/10"
               >
-                <span className="font-display text-2xl text-[#D4AF37]/50 mb-2 block">0{i + 1}</span>
-                <h4 className="font-display text-xl mb-2 text-[#FDFBF7]">{step.title}</h4>
-                <p className="font-body text-sm leading-relaxed text-[#FDFBF7]/60 text-justify">{step.text}</p>
+                <button
+                  onClick={() => setActiveProcess(activeProcess === i ? null : i)}
+                  className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors"
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="font-display text-lg text-[#D4AF37]/60">0{i + 1}</span>
+                    <h4 className="font-display text-lg text-[#FDFBF7]">{step.title}</h4>
+                  </div>
+                  <span className={`text-[#FDFBF7]/40 text-xl transition-transform duration-300 ${activeProcess === i ? 'rotate-45' : ''}`}>+</span>
+                </button>
+                <div className={`overflow-hidden transition-all duration-400 ease-in-out ${activeProcess === i ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <p className="font-body text-sm leading-relaxed text-[#FDFBF7]/60 px-4 pb-4 pl-14">{step.text}</p>
+                </div>
               </motion.div>
             ))}
           </div>
