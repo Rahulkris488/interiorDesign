@@ -5,6 +5,8 @@
   --color-dark-surface: #0A0A0A;
   --color-dark-card: #1A1A1A;
   --color-dark-elevated: #141414;
+  --color-warm-cream: #FAF7F2;
+  --color-warm-brown: #8B7355;
 }
 
 ::selection {
