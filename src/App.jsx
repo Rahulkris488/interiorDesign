@@ -221,8 +221,8 @@ const App = () => {
             {/* Floating 3D Object / Badge */}
             <motion.div className="absolute bottom-8 right-8 md:bottom-12 md:right-12 bg-[#1A1A1A] text-[#FAF7F2] p-5 md:p-6 shadow-2xl z-10"
               initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.9 }}>
-              <p className="font-body text-[9px] uppercase tracking-[0.3em] text-[#D4AF37] mb-1">Since 2010</p>
-              <p className="font-display text-2xl md:text-3xl">15<sup className="text-[#D4AF37] text-sm">+</sup></p>
+              <p className="font-body text-[9px] uppercase tracking-[0.3em] text-[#D4AF37] mb-1">Since 2023</p>
+              <p className="font-display text-2xl md:text-3xl">3<sup className="text-[#D4AF37] text-sm">+</sup></p>
               <p className="font-body text-[9px] uppercase tracking-widest text-white/50">Years of Excellence</p>
             </motion.div>
           </motion.div>
@@ -232,7 +232,7 @@ const App = () => {
         <motion.div className="bg-[#1A1A1A] relative z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 1 }}>
           <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-6 md:py-8 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-white/10">
             {[
-              { num: "15+", label: "Years Experience" }, { num: "100+", label: "Projects Completed" },
+              { num: "3+", label: "Years Experience" }, { num: "100+", label: "Projects Completed" },
               { num: "4.9", label: "Client Rating" }, { num: "50+", label: "Design Awards" }
             ].map((stat, i) => (
               <div key={i} className="text-center md:px-8">
@@ -270,7 +270,7 @@ const App = () => {
               <div className="grid grid-cols-2 gap-8 items-end">
                 <div className="space-y-8">
                   <div className="text-center p-8 border border-[#1A1A1A]/10">
-                    <p className="font-display text-6xl md:text-7xl text-[#1A1A1A] leading-none">15<sup className="text-[#D4AF37] text-xl align-super">+</sup></p>
+                    <p className="font-display text-6xl md:text-7xl text-[#1A1A1A] leading-none">3<sup className="text-[#D4AF37] text-xl align-super">+</sup></p>
                     <p className="font-body text-[10px] uppercase tracking-[0.25em] text-[#1A1A1A]/40 mt-3">Years Experience</p>
                   </div>
                   <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800"
