@@ -94,7 +94,6 @@ const App = () => {
     <div className="min-h-screen font-sans selection:bg-[#D4AF37] selection:text-[#0A0A0A] cursor-auto md:cursor-none overflow-x-hidden">
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap');
         .font-display { font-family: 'Playfair Display', serif; }
         .font-body { font-family: 'Inter', sans-serif; }
         .font-script { font-family: 'Cormorant Garamond', serif; }
@@ -135,7 +134,12 @@ const App = () => {
             ))}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-8">
+            <a href="https://www.instagram.com/noha_interiors?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer"
+              className={`transition-colors duration-300 ${isScrolled ? 'text-[#1A1A1A]/70 hover:text-[#D4AF37]' : 'text-[#1A1A1A]/60 hover:text-[#D4AF37]'}`}
+              onMouseEnter={() => handleCursorHover("Follow")} onMouseLeave={handleCursorLeave} aria-label="Instagram">
+              <Instagram size={22} />
+            </a>
             <a href="#contact" className="bg-[#1A1A1A] text-[#FAF7F2] px-7 py-3 font-body text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-[#D4AF37] hover:text-[#0A0A0A] transition-all duration-400"
               onMouseEnter={() => handleCursorHover("Book")} onMouseLeave={handleCursorLeave}>
               Get a Consultation
@@ -167,10 +171,13 @@ const App = () => {
               </li>
             ))}
           </ul>
-          <div className="absolute bottom-12 flex gap-8 text-[#1A1A1A]">
-            <Instagram className="opacity-40 hover:opacity-100 transition-opacity" size={20} />
-            <Linkedin className="opacity-40 hover:opacity-100 transition-opacity" size={20} />
-            <Facebook className="opacity-40 hover:opacity-100 transition-opacity" size={20} />
+          <div className="absolute bottom-12 flex gap-8 text-[#1A1A1A] items-center">
+            <a href="https://www.instagram.com/noha_interiors?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 hover:text-[#D4AF37] transition-all flex items-center gap-2">
+              <Instagram size={28} />
+              <span className="font-body text-xs uppercase tracking-widest font-semibold">@noha_interiors</span>
+            </a>
+            <a href="#" className="opacity-40 hover:opacity-100 transition-opacity"><Linkedin size={24} /></a>
+            <a href="#" className="opacity-40 hover:opacity-100 transition-opacity"><Facebook size={24} /></a>
           </div>
         </div>
       </div>
@@ -214,8 +221,8 @@ const App = () => {
           <motion.div className="lg:w-[50%] relative lg:h-[100dvh] h-[50vh] w-full" initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, delay: 0.3 }}>
             <div className="absolute inset-0 lg:right-[-4rem] overflow-hidden">
               <motion.img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1600"
-                alt="Luxury Interior" className="w-full h-full object-cover" style={{ y: yHero }}
-                onMouseEnter={() => handleCursorHover("Explore")} onMouseLeave={handleCursorLeave} />
+                alt="Luxury Interior" className="w-full h-full object-cover" style={{ y: yHero }} fetchPriority="high" decoding="async"
+                onMouseEnter={() => handleCursorHover("")} onMouseLeave={handleCursorLeave} />
               <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-[#FAF7F2]/40 hidden lg:block" />
             </div>
             {/* Floating 3D Object / Badge */}
@@ -258,7 +265,7 @@ const App = () => {
               </p>
               {/* Small Project Image */}
               <div className="flex items-center gap-4">
-                <img src={Work1} alt="Our Project" className="w-16 h-16 md:w-20 md:h-20 object-cover" />
+                <img src={Work1} alt="Our Project" className="w-16 h-16 md:w-20 md:h-20 object-cover" loading="lazy" decoding="async" />
                 <div>
                   <p className="font-body text-[10px] uppercase tracking-[0.2em] text-[#8B7355]">Our Project</p>
                   <p className="font-display text-lg text-[#1A1A1A]">Latest Work</p>
@@ -274,11 +281,13 @@ const App = () => {
                     <p className="font-body text-[10px] uppercase tracking-[0.25em] text-[#1A1A1A]/40 mt-3">Years Experience</p>
                   </div>
                   <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800"
-                    className="w-full aspect-[3/4] object-cover" alt="Interior" onMouseEnter={() => handleCursorHover("View")} onMouseLeave={handleCursorLeave} />
+                    className="w-full aspect-[3/4] object-cover" alt="Interior" loading="lazy" decoding="async"
+                    onMouseEnter={() => handleCursorHover("")} onMouseLeave={handleCursorLeave} />
                 </div>
                 <div className="space-y-8">
                   <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800"
-                    className="w-full aspect-[4/5] object-cover" alt="Interior Detail" onMouseEnter={() => handleCursorHover("Detail")} onMouseLeave={handleCursorLeave} />
+                    className="w-full aspect-[4/5] object-cover" alt="Interior Detail" loading="lazy" decoding="async"
+                    onMouseEnter={() => handleCursorHover("")} onMouseLeave={handleCursorLeave} />
                   <div className="text-center p-8 border border-[#1A1A1A]/10">
                     <p className="font-display text-6xl md:text-7xl text-[#1A1A1A] leading-none">100<sup className="text-[#D4AF37] text-xl align-super">+</sup></p>
                     <p className="font-body text-[10px] uppercase tracking-[0.25em] text-[#1A1A1A]/40 mt-3">Total Projects</p>
@@ -291,8 +300,8 @@ const App = () => {
           {/* Full-width Interior Image Banner */}
           <motion.div className="mt-16 md:mt-24 relative overflow-hidden" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
             <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000"
-              className="w-full h-[40vh] md:h-[60vh] object-cover" alt="Interior Panorama"
-              onMouseEnter={() => handleCursorHover("Explore")} onMouseLeave={handleCursorLeave} />
+              className="w-full h-[40vh] md:h-[60vh] object-cover" alt="Interior Panorama" loading="lazy" decoding="async"
+              onMouseEnter={() => handleCursorHover("")} onMouseLeave={handleCursorLeave} />
             <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-transparent to-transparent" />
           </motion.div>
         </div>
@@ -388,9 +397,9 @@ const App = () => {
             {galleryItems.map((item, index) => (
               <motion.div key={item.id} initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 0.8, delay: index * 0.1 }} className={`group md:cursor-none ${index % 3 === 0 ? 'md:col-span-2' : ''}`}
-                onMouseEnter={() => handleCursorHover("View")} onMouseLeave={handleCursorLeave}>
+                onMouseEnter={() => handleCursorHover("")} onMouseLeave={handleCursorLeave}>
                 <div className={`relative overflow-hidden mb-4 ${index % 3 === 0 ? 'aspect-[21/9]' : 'aspect-[4/3]'}`}>
-                  <img src={item.image} alt={item.title}
+                  <img src={item.image} alt={item.title} loading="lazy" decoding="async"
                     className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-105" />
                   <div className="absolute inset-0 bg-[#8B7355]/0 group-hover:bg-[#8B7355]/10 transition-colors duration-700" />
                 </div>
@@ -403,6 +412,22 @@ const App = () => {
                 </div>
               </motion.div>
             ))}
+
+            {/* Your Next Project Card */}
+            <motion.div initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.8, delay: 0.5 }} className="group md:cursor-none h-full"
+              onMouseEnter={() => handleCursorHover("Start")} onMouseLeave={handleCursorLeave}>
+              <a href="#contact" className="block relative w-full h-full min-h-[300px] flex flex-col items-center justify-center text-center p-8 bg-[#FAF7F2] border border-[#1A1A1A]/10 hover:border-[#D4AF37] transition-colors duration-500 overflow-hidden">
+                <div className="absolute inset-0 bg-[#D4AF37]/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
+                <div className="relative z-10 flex flex-col items-center">
+                  <p className="font-body text-[10px] uppercase tracking-[0.3em] text-[#8B7355] mb-3">Become our next success</p>
+                  <h3 className="font-display text-4xl md:text-5xl text-[#1A1A1A] mb-6">Your Next<br /><span className="italic text-[#8B7355]">Project</span></h3>
+                  <div className="w-12 h-12 rounded-full border border-[#1A1A1A]/20 flex items-center justify-center group-hover:border-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-[#FAF7F2] text-[#1A1A1A] transition-all duration-500">
+                    <ArrowRight size={20} />
+                  </div>
+                </div>
+              </a>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -518,12 +543,22 @@ const App = () => {
             </div>
             <div className="md:col-span-3">
               <h4 className="font-body text-[10px] uppercase tracking-[0.3em] text-[#D4AF37] mb-4">Follow Us</h4>
-              <div className="flex gap-4">
-                {[Instagram, Linkedin, Facebook].map((Icon, i) => (
-                  <a key={i} href="#" className="w-10 h-10 border border-white/10 flex items-center justify-center text-white/40 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-all">
-                    <Icon size={16} />
-                  </a>
-                ))}
+              <div className="flex flex-col gap-4">
+                <a href="https://www.instagram.com/noha_interiors?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer"
+                  className="group flex items-center gap-4 text-white/80 hover:text-[#D4AF37] transition-colors p-3 border border-white/10 hover:border-[#D4AF37]/50 bg-white/5">
+                  <Instagram size={24} />
+                  <div>
+                    <p className="font-body text-sm font-semibold tracking-wide">Instagram</p>
+                    <p className="font-body text-[10px] text-white/40 group-hover:text-[#D4AF37]/60">@noha_interiors</p>
+                  </div>
+                </a>
+                <div className="flex gap-4">
+                  {[Linkedin, Facebook].map((Icon, i) => (
+                    <a key={i} href="#" className="w-12 h-12 border border-white/10 flex items-center justify-center text-white/40 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-all">
+                      <Icon size={20} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
